@@ -1,0 +1,13 @@
+.home_logo{
+    width: 90%;
+    margin: 30px auto;
+}
+
+.home_logo img{
+    width: 305px;
+    height: 200px;
+}
+.home_logo .home__logo--items{
+    box-sizing: border-box;
+    padding: 15px;
+}

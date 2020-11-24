@@ -12,7 +12,6 @@
 
     </head>
 
-
     <body>
         <div class="col-4 home__logo--items">
             <a href="">

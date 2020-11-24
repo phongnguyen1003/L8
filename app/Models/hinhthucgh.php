@@ -10,4 +10,8 @@ class hinhthucgh extends Model
     use HasFactory;
     protected $table='HinhThucGH';
 
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
 }

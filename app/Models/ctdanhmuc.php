@@ -10,4 +10,10 @@ class ctdanhmuc extends Model
     use HasFactory;
     protected $table='CTDanhMuc';
 
+    public function danhmuc()
+    {
+    	return $this->belongsTo('danhmuc');
+    }
+
+
 }

@@ -10,4 +10,8 @@ class loaitin extends Model
     use HasFactory;
     protected $table='LoaiTin';
 
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
 }

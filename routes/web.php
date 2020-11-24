@@ -15,37 +15,60 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//DATABASE
 Route::get('/dbquangcao', [DBQuangCao::class, 'lquangcao']);		//CÁCH VIẾT MỚI
 
-
+//TRANG CHỦ
 Route::get('/trangchu','App\Http\Controllers\HomeController@home');
-Route::post('/logintrangchu','App\Http\Controllers\HomeController@xulydangnhap');
-Route::get('/dangnhap','App\Http\Controllers\HomeController@dangnhap');
-// Route::get('/login','App\Http\Controllers\HomeController@login');
 Route::get('/layout','App\Http\Controllers\HomeController@layout');
+
+// XỬ LÝ CỦA ỨNG DỤNG
+Route::get('/dangnhap','App\Http\Controllers\HomeController@dangnhap');
+Route::post('/xulydangnhap','App\Http\Controllers\HomeController@xulydangnhap');
+
 Route::get('/dangky','App\Http\Controllers\HomeController@dangky');
-Route::get('/dangbai','App\Http\Controllers\HomeController@dangbai');
-Route::get('/suabaiviet','App\Http\Controllers\HomeController@suabaiviet');
+Route::post('/xulydangky','App\Http\Controllers\HomeController@xulydangky');
+
+Route::get('/dangxuat','App\Http\Controllers\HomeController@dangxuat');
+
+
+//XỬ LÝ CỦA DIỄN ĐÀN
+Route::get('/dangkydd','App\Http\Controllers\HomeController@dangkydd');
+Route::get('/dangnhapdd','App\Http\Controllers\HomeController@dangnhapdd');
+Route::post('/xulydangkydd','App\Http\Controllers\HomeController@xulydangkydd');
+Route::post('/xulydangnhapdd','App\Http\Controllers\HomeController@xulydangnhapdd');
+
+
+
+
+
+// Route::get('/dangbai','App\Http\Controllers\HomeController@dangbai');
+Route::get('/taobaiviet','App\Http\Controllers\BaiVietController@taobaiviet');
+Route::get('/suabaiviet','App\Http\Controllers\BaiVietController@suabaiviet');
+Route::get('/qlbaiviet','App\Http\Controllers\BaiVietController@qlbaiviet');
+Route::post('/luubaiviet','App\Http\Controllers\BaiVietController@luubaiviet');
 
 
 //sao không thấy màn hình của Firefox, tuy rằng có hiện ra kết quả chạy
-Route::get('/run_cmd', function () {
-    //cách gọi 1 command line 1a: trực tiếp,
-   $process = new Process(['php','artisan','dusk']
-                       ,'C:\xampp\htdocs\Laravel_8.0.3\L8');             //folder để chạy 1 process
+// Route::get('/run_cmd', function () {
+//     //cách gọi 1 command line 1a: trực tiếp,
+//    $process = new Process(['php','artisan','dusk']
+//                        ,'C:\xampp\htdocs\Laravel_8.0.3\L8');             //folder để chạy 1 process
 
-   //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
-//    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
+//    //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
+// //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
 
-    //$process->setPTY(true); 			//chưa kiểm tra
-   $process->run();
+//     //$process->setPTY(true); 			//chưa kiểm tra
+//    $process->run();
 
-    //bắt lỗi, hiện error
-    if (!$process->isSuccessful()) {
-        throw new ProcessFailedException($process);
-    }
+//     //bắt lỗi, hiện error
+//     if (!$process->isSuccessful()) {
+//         throw new ProcessFailedException($process);
+//     }
 
-    //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
-    echo '<pre>'.$process->getOutput();
+//     //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+//     echo '<pre>'.$process->getOutput();
 
-});//end Route::get('/',
+// });//end Route::get('/',
+
+// Route::get('/run_cmd', 'App\Http\Controllers\HomeController@runcmd');//end Route::get('/',

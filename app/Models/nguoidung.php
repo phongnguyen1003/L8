@@ -10,4 +10,9 @@ class nguoidung extends Model
     use HasFactory;
     protected $table='NguoiDung';
 
+
+    public function taikhoandd()
+    {
+        return $this->hasMany('taikhoandd');
+    }
 }

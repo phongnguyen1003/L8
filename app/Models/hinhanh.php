@@ -10,4 +10,10 @@ class hinhanh extends Model
     use HasFactory;
     protected $table='HinhAnh';
 
+    public function baiviet()
+    {
+    	return $this->belongsTo('baiviet');
+    }
+
+
 }

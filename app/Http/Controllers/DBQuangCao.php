@@ -15,29 +15,33 @@ class DBQuangCao extends Controller
             $table->string('hoten_nd', 50);
             $table->string('email_nd', 50);
             $table->string('sdt_nd', 10);
-            $table->string('matkhau_nd', 50);
+            $table->text('matkhau_nd');
+           // $table->string('matkhau_nd', 50);
             $table->timestamps();
         });
 
-        Schema::create('DienDan', function ($table) {
-            $table->increments('id_dd');
-            $table->string('tendiendan', 50);
-            $table->timestamps();
-        });
+        // Schema::create('DienDan', function ($table) {
+        //     $table->increments('id_dd');
+        //     $table->string('tendiendan', 50);
+        //     $table->timestamps();
+        // });
 
 
         Schema::create('TaiKhoanDD', function ($table) {
             $table->increments('id_tk');
             $table->string('hoten', 50);
+            $table->string('tendangnhap', 50);
             $table->string('email', 50)->unique();
             $table->string('sodienthoai', 10)->unique();
-            $table->string('matkhau', 20);
+            $table->text('matkhau');
+           // $table->string('matkhau', 20);
             $table->string('diachi',100);
             $table->string('phuong', 50);
             $table->string('quan', 50);
             $table->string('tinh', 50);
-            $table->integer('id_dd')->unsigned();
-            $table->foreign('id_dd')->references('id_dd')->on('DienDan');
+            $table->string('tendiendan', 50);
+            // $table->integer('id_dd')->unsigned();
+            // $table->foreign('id_dd')->references('id_dd')->on('DienDan');
             $table->integer('id_nd')->unsigned();
             $table->foreign('id_nd')->references('id_nd')->on('NguoiDung');
             $table->timestamps();
@@ -76,13 +80,21 @@ class DBQuangCao extends Controller
             $table->timestamps();
         });
 
+        Schema::create('HinhAnh', function ($table) {
+            $table->increments('id_ha');
+            $table->string('tenhinh', 50);
+            $table->string('url', 100);
+            // $table->integer('id_bv')->unsigned();
+            // $table->foreign('id_bv')->references('id_bv')->on('BaiViet');
+            $table->timestamps();
+        });
+
         Schema::create('BaiViet', function ($table) {
             $table->increments('id_bv');
             $table->string('tenbaiviet', 50);
-            $table->string('tieude', 100);
-            $table->string('noidung', 400);
+            $table->string('tieude', 50);
+            $table->string('noidung', 1500);
             $table->integer('giaban');
-            $table->string('matkhau', 20);
             $table->integer('id_tk')->unsigned();
             $table->foreign('id_tk')->references('id_tk')->on('TaiKhoanDD');
             $table->integer('id_dm')->unsigned();
@@ -93,19 +105,10 @@ class DBQuangCao extends Controller
             $table->foreign('id_qm')->references('id_qm')->on('QuyMo');
             $table->integer('id_ht')->unsigned();
             $table->foreign('id_ht')->references('id_ht')->on('HinhThucGH');
+            $table->integer('id_ha')->unsigned();
+            $table->foreign('id_ha')->references('id_ha')->on('HinhAnh');
             $table->timestamps();
         });
-
-        Schema::create('HinhAnh', function ($table) {
-            $table->increments('id_ha');
-            $table->string('tenhinh', 50);
-            $table->string('url', 100);
-            $table->integer('id_bv')->unsigned();
-            $table->foreign('id_bv')->references('id_bv')->on('BaiViet');
-            $table->timestamps();
-        });
-
-
 
 
     	echo "tạo bảng thành công ";

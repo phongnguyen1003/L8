@@ -1,13 +1,19 @@
 .home_logo{
     width: 90%;
-    margin: 30px auto;
+    margin-left: 50px;
+    margin-top: -20px;
 }
-
+.home1{
+    display: flex;
+}
 .home_logo img{
-    width: 305px;
-    height: 200px;
+    width: 360px;
+    height: 260px;
 }
 .home_logo .home__logo--items{
     box-sizing: border-box;
     padding: 15px;
+}
+#container > header > div.top-nav.clearfix > ul > li.dropdown > a > b{
+    border: none;
 }

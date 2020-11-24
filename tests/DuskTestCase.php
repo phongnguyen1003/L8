@@ -49,10 +49,18 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function chromeDriver()
     {
+        //$co = new ChromeOptions
+        //$co->user agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36";
+        // $options = ($co)->addArguments([
         $options = (new ChromeOptions)->addArguments([
             //'--disable-gpu',
             //'--headless',
             '--window-size=1920,1080',
+            // '--window-size=1366,768',
+            // '--window-size=1280,800',
+            // '--window-size=1600,900',
+            // '--window-size=800,600',
+            '"user-agent"=Mozilla/5.0 (Linux; U; Android 5.0.1; HTC Butterfly S 901s Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.1275.369 Mobile Safari/603.6',
         ]);
 
         return RemoteWebDriver::create(

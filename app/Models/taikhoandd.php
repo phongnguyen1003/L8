@@ -10,4 +10,14 @@ class taikhoandd extends Model
     use HasFactory;
     protected $table='TaiKhoanDD';
 
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
+
+    public function nguoidung()
+    {
+    	return $this->belongsTo('nguoidung');
+    }
+
 }

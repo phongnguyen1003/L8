@@ -10,4 +10,8 @@ class quymo extends Model
     use HasFactory;
     protected $table='QuyMo';
 
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
 }

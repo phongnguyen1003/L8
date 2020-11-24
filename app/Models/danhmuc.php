@@ -10,4 +10,13 @@ class danhmuc extends Model
     use HasFactory;
     protected $table='DanhMuc';
 
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
+
+    public function ctdanhmuc()
+    {
+        return $this->hasMany('ctdanhmuc');
+    }
 }

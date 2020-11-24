@@ -22,13 +22,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="log-w3">
-<div class="w3layouts-main">
-	<h2>Đăng Nhập</h2>
-        <form action="{{URL::to('/logintrangchu')}}" method="post">
+<div class="w3layouts-main" style="width: 35%;">
+    <h2>Đăng Nhập</h2>
+
+    <?php
+        $message = Session::get('message');
+        if($message){
+            echo '<span class="text-alert">'.$message.'</span>';
+            Session::put('message',null);
+        }
+
+    ?>
+
+        <form action="{{URL::to('/xulydangnhap')}}" method="post">
             {{ csrf_field()}}
-            <input type="text" class="ggg" name="Email" placeholder="E-MAIL" required="">
-			<input type="password" class="ggg" name="Password" placeholder="MẬT KHẨU" required="">
-			<span><a href="#">Đăng ký tài khoản</a></span>
+            <input type="text" class="ggg" name="email" placeholder="E-MAIL" required="">
+			<input type="password" class="ggg" name="password" placeholder="MẬT KHẨU" required="">
+			<span style="width: 40%;"><a href="{{URL::to('/dangky')}}" style="font-weight: 500; text-decoration: underline">Đăng ký tài khoản</a></span>
 			<h6><a href="#">Quên mật khẩu?</a></h6>
 				<div class="clearfix"></div>
 				<input type="submit" value="Đăng Nhập" name="login">

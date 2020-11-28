@@ -7,6 +7,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\taikhoandd;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 
 class ExampleTest extends DuskTestCase
@@ -24,55 +25,6 @@ class ExampleTest extends DuskTestCase
     }
         */
 
-
-    // public function testBasicExample()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/')
-    //                 ->assertSee('Laravel');
-    //     });
-    // }
-
-
-    // public function  testlogin()
-    // {
-    //     $this-> browse(function(Browser $first){
-    //         $first  ->visit('https://id.muaban.net/')
-    //                 ->type('UserName','0395608800')
-    //                 ->type('Password','23051998')
-    //                 ->press('Đăng nhập')
-    //                 ->pause(5000)
-    //                 ->assertSee('Đăng nhập');
-    //     });
-    // }
-
-    // public function createAcount()
-    // {
-    //     $this-> browse(function(Browser $first){
-    //         $first  ->visit('https://id.muaban.net/')
-    //                 ->clickLink('Đăng ký ngay')
-    //                 ->assertSee('Đăng ký')
-    //                 ->type('UserName','0395608800')
-    //                 ->type('Password','23051998')
-    //                 ->press("Đăng ký")
-    //                 ->pause(5000)
-    //                 ->assertSee('Đăng ký');
-    //     });
-    // }
-
-    // public function dangbai()
-    // {
-    //     $this-> browse(function(Browser $first){
-    //         $first  ->visit('https://id.muaban.net/')
-    //                 ->type('UserName','0395608800')
-    //                 ->type('Password','23051998')
-    //                 ->assertSee('Đăng nhập')
-    //                 ->press('Đăng nhập')
-    //                 ->clickLink('ĐĂNG TIN MIỄN PHÍ')
-    //                 ->pause(5000)
-    //                 ->assertSee('Bất động sản');
-    //     });
-    // }
 
     //============================================CHỢ TỐT==============================================
 
@@ -96,16 +48,17 @@ class ExampleTest extends DuskTestCase
     }
 
     /**
-     * @group dangnhapct
+     * @group dangnhapchotot
      */
     public function  testDangNhapCT()
     {
+
         $this-> browse(function(Browser $first){
-            $first  ->visit('https://www.chotot.com/')
-                    ->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(2) > div')
+            $first  ->visit('https://accounts.chotot.com/login?continue=https://www.chotot.com/')
+                    //->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(2) > div')
                     ->pause(5000)
                     ->type('#content > div > div > div > div > form > input:nth-child(1)','0395608800')
-                    ->type('#content > div > div > div > div > form > input:nth-child(2)','23051998')
+                    ->type('#content > div > div > div > div > form > input:nth-child(2)','123456')
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->pause(4000)
                     ->press('ĐĂNG NHẬP')
@@ -263,74 +216,74 @@ class ExampleTest extends DuskTestCase
 
     //===================================================FACEBOOK=================================
 
-    //  /**
-    //  * @group dangnhapfb
-    //  */
-    // public function  testDangNhapfb()
-    // {
-    //     $this-> browse(function(Browser $first){
-    //         $first  ->visit('https://www.facebook.com/')
-    //                 ->type('email','linhbathai@gmail.com')
-    //                 ->type('pass','23051998')
-    //                 ->pause(2999)
-    //                 ->press('login')
-    //                 ->pause(4999)
-    //                 ->assertSee('facebook');
-    //     });
-    // }
+     /**
+     * @group dangnhapfb
+     */
+    public function  testDangNhapfb()
+    {
+        $this-> browse(function(Browser $first){
+            $first  ->visit('https://www.facebook.com/')
+                    ->type('email','linhbathai@gmail.com')
+                    ->type('pass','23051998')
+                    ->pause(2999)
+                    ->press('login')
+                    ->pause(4999)
+                    ->assertSee('facebook');
+        });
+    }
 
-    //  /**
-    //  * @group dangkyfb
-    //  */
+     /**
+     * @group dangkyfb
+     */
 
-    // public function  testDangKyfb()
-    // {
-    //     $this-> browse(function(Browser $first){
-    //         $first  ->visit('https://www.facebook.com/')
-    //                 ->pause(2000)
-    //                 ->click('#u_0_2')
-    //                 ->pause(3000)
-    //                 ->type('lastname','Trâu')
-    //                 ->type('firstname','Trâu')
-    //                 ->type('reg_email__','thuylinh23598@gmail.com')
-    //                 ->type('#u_1_j','thuylinh23598@gmail.com')
-    //                 ->type('#password_step_input','23051998')
-    //                 ->select('#day','23')
-    //                 ->select('#month','Tháng 5')
-    //                 ->select('#year','1998')
-    //                 ->radio('#u_1_o > span:nth-child(1)','#u_1_4')
-    //                 ->press('#u_1_s')
-    //                 ->pause(49999)
-    //                 ->assertSee('facebook');
-    //     });
-    // }
+    public function  testDangKyfb()
+    {
+        $this-> browse(function(Browser $first){
+            $first  ->visit('https://www.facebook.com/')
+                    ->pause(2000)
+                    ->click('#u_0_2')
+                    ->pause(3000)
+                    ->type('lastname','Trâu')
+                    ->type('firstname','Trâu')
+                    ->type('reg_email__','thuylinh23598@gmail.com')
+                    ->type('#u_1_j','thuylinh23598@gmail.com')
+                    ->type('#password_step_input','23051998')
+                    ->select('#day','23')
+                    ->select('#month','Tháng 5')
+                    ->select('#year','1998')
+                    ->radio('#u_1_o > span:nth-child(1)','#u_1_4')
+                    ->press('#u_1_s')
+                    ->pause(49999)
+                    ->assertSee('facebook');
+        });
+    }
 
-    //  /**
-    //  * @group dangbaifb
-    //  */
-    // public function  testDangBaiHoiNhomfb()
-    // {
-    //     $this->browse(function (Browser $first) {
-    //         $first->visit('https://www.facebook.com/')
-    //             ->type('email', 'linhbathai@gmail.com')
-    //             ->type('pass', '23051998')
-    //             ->pause(2999)
-    //             ->press('login')
-    //             ->pause(1999)
-    //             ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.taijpn5t.gs1a9yip.owycx6da.btwxx1t3.dp1hu0rb.p01isnhg > div > div.rq0escxv.lpgh02oy.du4w35lb.pad24vr5.rirtxc74.dp1hu0rb.fer614ym.bx45vsiw.o387gat7.qbu88020.ni8dbmo4.stjgntxs.czl6b2yu > div > div > div.j83agx80.cbu4d94t.buofh1pr > div > div > div.buofh1pr > div:nth-child(3) > ul > li > div > a')
-    //             ->pause(5999)
-    //             ->press('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.l9j0dhe7.dp1hu0rb.cbu4d94t.j83agx80 > div.j83agx80.cbu4d94t > div > div > div > div > div.rq0escxv.l9j0dhe7.du4w35lb.qmfd67dx.hpfvmrgz.gile2uim.buofh1pr.g5gj957u.aov4n071.oi9244e8.bi6gxh9e.h676nmdw.aghb5jc5 > div:nth-child(1) > div > div > div > div.bp9cbjyn.j83agx80.ihqw7lf3.hv4rvrfc.dati1w0a.pybr56ya > div')
-    //             ->pause(5900)
-    //             ->type('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.q5bimw55.rpm2j7zs.k7i0oixp.gvuykj2m.j83agx80.cbu4d94t.ni8dbmo4.eg9m0zos.l9j0dhe7.du4w35lb.ofs802cu.pohlnb88.dkue75c7.mb9wzai9.l56l04vs.r57mb794.kh7kg01d.c3g1iek1.buofh1pr > div.j83agx80.cbu4d94t.buofh1pr > div.o6r2urh6.buofh1pr.datstx6m.l9j0dhe7.oh7imozk > div.rq0escxv.buofh1pr.df2bnetk.hv4rvrfc.dati1w0a.l9j0dhe7.k4urcfbm.du4w35lb.gbhij3x4 > div > div > div > div > div._5rpb > div', 'love VN')
-    //             ->pause(3999)
-    //             ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div > div > div > div',storage_path('app/public/images/g5.jpg'))
-    //             // ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div')
-    //             ->pause(10000)
-    //             ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.hv4rvrfc.dati1w0a.discj3wi.b5q2rw42.lq239pai.mysgfdmx.hddg9phg > div > div')
-    //             ->pause(5000)
-    //             ->assertSee('facebook');
-    //     });
-    // }
+     /**
+     * @group dangbaifb
+     */
+    public function  testDangBaiHoiNhomfb()
+    {
+        $this->browse(function (Browser $first) {
+            $first->visit('https://www.facebook.com/')
+                ->type('email', 'linhbathai@gmail.com')
+                ->type('pass', '23051998')
+                ->pause(2999)
+                ->press('login')
+                ->pause(1999)
+                ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.taijpn5t.gs1a9yip.owycx6da.btwxx1t3.dp1hu0rb.p01isnhg > div > div.rq0escxv.lpgh02oy.du4w35lb.pad24vr5.rirtxc74.dp1hu0rb.fer614ym.bx45vsiw.o387gat7.qbu88020.ni8dbmo4.stjgntxs.czl6b2yu > div > div > div.j83agx80.cbu4d94t.buofh1pr > div > div > div.buofh1pr > div:nth-child(3) > ul > li > div > a')
+                ->pause(5999)
+                ->press('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.l9j0dhe7.dp1hu0rb.cbu4d94t.j83agx80 > div.j83agx80.cbu4d94t > div > div > div > div > div.rq0escxv.l9j0dhe7.du4w35lb.qmfd67dx.hpfvmrgz.gile2uim.buofh1pr.g5gj957u.aov4n071.oi9244e8.bi6gxh9e.h676nmdw.aghb5jc5 > div:nth-child(1) > div > div > div > div.bp9cbjyn.j83agx80.ihqw7lf3.hv4rvrfc.dati1w0a.pybr56ya > div')
+                ->pause(5900)
+                ->type('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.q5bimw55.rpm2j7zs.k7i0oixp.gvuykj2m.j83agx80.cbu4d94t.ni8dbmo4.eg9m0zos.l9j0dhe7.du4w35lb.ofs802cu.pohlnb88.dkue75c7.mb9wzai9.l56l04vs.r57mb794.kh7kg01d.c3g1iek1.buofh1pr > div.j83agx80.cbu4d94t.buofh1pr > div.o6r2urh6.buofh1pr.datstx6m.l9j0dhe7.oh7imozk > div.rq0escxv.buofh1pr.df2bnetk.hv4rvrfc.dati1w0a.l9j0dhe7.k4urcfbm.du4w35lb.gbhij3x4 > div > div > div > div > div._5rpb > div', 'love VN')
+                ->pause(3999)
+                ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div > div > div > div',storage_path('app/public/images/g5.jpg'))
+                // ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div')
+                ->pause(10000)
+                ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.hv4rvrfc.dati1w0a.discj3wi.b5q2rw42.lq239pai.mysgfdmx.hddg9phg > div > div')
+                ->pause(5000)
+                ->assertSee('facebook');
+        });
+    }
 
 
 
@@ -366,7 +319,7 @@ class ExampleTest extends DuskTestCase
     }
 
      /**
-     * @group dangnhapct
+     * @group dangnhap24hqc
      */
      public function  testDangNhap24hqc()
     {

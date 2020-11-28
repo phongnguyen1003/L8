@@ -3,7 +3,7 @@
     <!DOCTYPE html>
 
     <head>
-        <title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Responsive_table :: w3layouts
+        <title>Quản lý bài viết
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,6 +22,14 @@
                             <div class="panel-heading">
                                 QUẢN LÝ BÀI VIẾT
                             </div>
+                            <?php
+                            $message = Session::get('message');
+                            if($message){
+                                echo '<span class="text-alert">'.$message.'</span>';
+                                Session::put('message',null);
+                            }
+
+                            ?>
                             <div>
                                 <table class="table" ui-jq="footable" ui-options='{
                 "paging": {
@@ -33,27 +41,30 @@
                 "sorting": {
                   "enabled": true
                 }}'>
-                                    <thead>
+                                    <thead style="text-align: center">
                                         <tr>
                                             <th data-breakpoints="xs">ID</th>
                                             <th>Tên Bài Viết</th>
-                                            <th>Tài Khoản đăng bài</th>
-                                            <th data-breakpoints="xs">Tên Diễn Đàn</th>
+                                            <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
+                                            <th>ID Tài Khoản Đăng Bài</th>
 
                                             <th data-breakpoints="xs sm md">Sửa Bài Viết</th>
                                             <th data-breakpoints="xs sm md">Xóa Bài Viết</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr data-expanded="true">
-                                            <td>1</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><button class="btn btn-danger" style="margin-left: 15px"><a class="text-white" href="">Sửa</a></button></td>
-                                            <td><button class="btn btn-danger" style="margin-left: 15px"><a class="text-white" href="">Xóa</a></button></td>
-                                        </tr>
+                                    <tbody style="text-align: center">
+                                        @foreach ($all_baiviet as $key => $baiviet)
 
+                                        <tr data-expanded="true">
+                                            <td>{{$baiviet->id_bv}}</td>
+                                            <td>{{$baiviet->tenbaiviet}}</td>
+                                            <td>{{$baiviet->tieude}}</td>
+                                            <td>{{$baiviet->id_tk}}</td>
+
+                                            <td><button class="btn btn-danger" style="margin-left: 15px"><a class="text-white" href="{{URL::to('/suabaiviet/'.$baiviet->id_bv)}}">Sửa</a></button></td>
+                                            <td><button class="btn btn-danger" style="margin-left: 15px"><a onclick="return confirm('Bạn có chắc muốn xóa bài viết này không?')" class="text-white" href="{{URL::to('/xoabaiviet/'.$baiviet->id_bv)}}">Xóa</a></button></td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

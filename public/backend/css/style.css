@@ -32,6 +32,7 @@ ul,label{
 body a:hover{
 	text-decoration:none;
 }
+
 	/*sidebar navigation*/
 #sidebar {
     width:240px;
@@ -196,6 +197,13 @@ ul.sidebar-menu li a.active i {
     -o-transition:all .3s ease-in-out;
     transition:all .3s ease-in-out;
 }
+#abcd{
+    margin-left:100px;
+}
+#abcde{
+    margin-top: -20px;
+}
+
 .footer {
     background: #d19a98;
     padding: 20px;
@@ -492,6 +500,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     padding-right:10px;
 }
 .top-nav .username {
+    padding-left: 10px;
     font-size:13px;
     color:#fff;
 }
@@ -2375,6 +2384,12 @@ input.ggg{
     margin: 14px 0px;
 	background: none;
 }
+select.ggg{
+    outline: none;
+    font-size: 14px;
+    margin: 14px 0px;
+}
+
 .w3layouts-main span {
     font-size: 16px;
     color: #fff;
@@ -2506,8 +2521,8 @@ div#chartContainer5,div#chartContainer6,div#chartContainer7,div#chartContainer8 
     height:150px;
     margin-top:20px;
 }
-canvas.canvasjs-chart-canvas {
-}
+/* canvas.canvasjs-chart-canvas {
+} */
 .chart_agile_bottom{
 	padding:20px;
 	background:#fff;
@@ -3139,3 +3154,16 @@ div#graph1, div#graph4, div#graph5, div#graph6, div#graph7, div#graph8, div#grap
     padding: 0;
 }
 }
+span.text-alert{
+    color: red;
+    font-size: 17px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#container > header > div.top-nav.clearfix > ul > li.dropdown > a > b{
+    border: none;
+}
+
+

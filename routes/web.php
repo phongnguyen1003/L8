@@ -31,6 +31,9 @@ Route::post('/xulydangky','App\Http\Controllers\HomeController@xulydangky');
 
 Route::get('/dangxuat','App\Http\Controllers\HomeController@dangxuat');
 
+Route::get('/info','App\Http\Controllers\HomeController@Info');
+ Route::post('/updateInfo','App\Http\Controllers\HomeController@updateInfo');
+
 
 //XỬ LÝ CỦA DIỄN ĐÀN
 Route::get('/dangkydd','App\Http\Controllers\HomeController@dangkydd');
@@ -44,9 +47,15 @@ Route::post('/xulydangnhapdd','App\Http\Controllers\HomeController@xulydangnhapd
 
 // Route::get('/dangbai','App\Http\Controllers\HomeController@dangbai');
 Route::get('/taobaiviet','App\Http\Controllers\BaiVietController@taobaiviet');
-Route::get('/suabaiviet','App\Http\Controllers\BaiVietController@suabaiviet');
 Route::get('/qlbaiviet','App\Http\Controllers\BaiVietController@qlbaiviet');
 Route::post('/luubaiviet','App\Http\Controllers\BaiVietController@luubaiviet');
+Route::get('/suabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@suabaiviet');
+Route::get('/xoabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@xoabaiviet');
+Route::post('/update_bv/{id_bv}','App\Http\Controllers\BaiVietController@update_bv');
+Route::get('/dangbai','App\Http\Controllers\BaiVietController@dangbai');
+
+
+// Route::get('/xulydiendan','App\Http\Controllers\DienDanController@xulydiendan');
 
 
 //sao không thấy màn hình của Firefox, tuy rằng có hiện ra kết quả chạy

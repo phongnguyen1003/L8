@@ -19,5 +19,9 @@ class taikhoandd extends Model
     {
     	return $this->belongsTo('nguoidung');
     }
+    // public function diendan()
+    // {
+    // 	return $this->belongsTo('diendan');
+    // }
 
 }

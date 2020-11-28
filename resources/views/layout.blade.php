@@ -69,9 +69,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
-                                style="width: 30px; height: 30px; border-radius: 50%">
+                            {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
+                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
+                                Hello,
                                 <?php
                                     $name = Session::get('hoten_nd');
                                     if($name){
@@ -123,7 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="{{ URL::to('/dangbai') }}">
                                 <i class="fa fa-upload"></i>
                                 <span>Đăng bài lên diễn đàn </span>
                             </a>
@@ -175,7 +176,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ URL::to('/info') }}">
                                 <i class="fa fa-user"></i>
                                 <span>Hồ sơ cá nhân</span>
                             </a>
@@ -196,6 +197,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 @yield('content_dangky')
                 @yield('content_dangbai')
                 @yield('content_qlbaiviet')
+                @yield('content_suabai')
+                @yield('content_info')
 
             </section>
             <!-- footer -->

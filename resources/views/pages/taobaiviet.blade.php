@@ -35,17 +35,17 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Chọn tỉnh thành:</label>
-                            <input type="text" class="form-control" name="tinh" value="<?php echo Session::get('tinh') ?>">
+                            <input disabled type="text" class="form-control" name="tinh" value="<?php echo Session::get('tinh') ?>">
                             {{-- <input type="text" class="form-control" name="tinh" value=""> --}}
                         </div>
                         <div class="form-group">
                             <label>Quận, huyện:</label>
-                            <input type="text" class="form-control" class="quan" value="<?php echo Session::get('quan') ?>">
+                            <input disabled type="text" class="form-control" class="quan" value="<?php echo Session::get('quan') ?>">
                             {{-- <input type="text" class="form-control" class="quan" value=""> --}}
                         </div>
                         <div class="form-group">
                             <label>Phường, xã, thị trấn:</label>
-                            <input type="text" class="form-control" name="phuong" value="<?php echo Session::get('phuong') ?>">
+                            <input disabled type="text" class="form-control" name="phuong" value="<?php echo Session::get('phuong') ?>">
                             {{-- <input type="text" class="form-control" name="phuong" value=""> --}}
 
                         </div>

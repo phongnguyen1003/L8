@@ -10,4 +10,8 @@ class diendan extends Model
     use HasFactory;
     protected $table='DienDan';
 
+    // public function taikhoandd()
+    // {
+    //     return $this->hasMany('taikhoandd');
+    // }
 }

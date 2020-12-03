@@ -19,6 +19,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class HomeController extends Controller
 {
     public function home(){
+        Session::forget('message');
         return view('pages.home');
     }
 
@@ -29,8 +30,8 @@ class HomeController extends Controller
 
     public function dangnhapdd_auto() {
         //cách gọi 1 command line 1a: trực tiếp,
-        $tkdd = taikhoandd::all()->last();
-
+        // lấy tài khoản đang đăng nhập
+        $tkdd = taikhoandd::where("id_tk",Session::get('id_tk'))->first();
         if($tkdd->tendiendan=="Chợ Tốt"){
             $process = new Process(['php','artisan','dusk','--group=dangnhapct']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
@@ -75,7 +76,12 @@ class HomeController extends Controller
             Session::put('phuong', $result->phuong);
             Session::put('quan', $result->quan);
             Session::put('sodt', $result->sodienthoai);
-
+            // luu id vao bang tam
+            DB::table('dangnhapdd')
+            ->updateOrInsert(
+                ['id' => 1],
+                ['id' => 1,'id_tk' => $result->id_tk]
+            );
             $this->dangnhapdd_auto();
             return Redirect::to('/trangchu');
 

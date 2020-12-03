@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\taikhoandd;
+use App\Models\dangnhapdd;
+use App\Models\baiviet;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,6 @@ class ExampleTest extends DuskTestCase
 
 
     //============================================CHỢ TỐT==============================================
-
     /**
      * @group dangkyct
      */
@@ -48,17 +49,21 @@ class ExampleTest extends DuskTestCase
     }
 
     /**
-     * @group dangnhapchotot
+     * @group dangnhapct
      */
     public function  testDangNhapCT()
     {
-
-        $this-> browse(function(Browser $first){
+        //lấy dữ liệu bảng tạm
+        $dangnhapdd = dangnhapdd::all()->first();
+        // lấy dữ liệu thằng đang đang nhập
+        $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        // dd($tkddddd);
+        $this-> browse(function(Browser $first)use($tkddn){
             $first  ->visit('https://accounts.chotot.com/login?continue=https://www.chotot.com/')
                     //->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(2) > div')
                     ->pause(5000)
-                    ->type('#content > div > div > div > div > form > input:nth-child(1)','0395608800')
-                    ->type('#content > div > div > div > div > form > input:nth-child(2)','123456')
+                    ->type('#content > div > div > div > div > form > input:nth-child(1)',$tkddn->sodienthoai)
+                    ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkddn->matkhau)
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->pause(4000)
                     ->press('ĐĂNG NHẬP')
@@ -71,14 +76,19 @@ class ExampleTest extends DuskTestCase
      * @group dangbaict
      */
     public function  testDangBaiCT()
-    {
-        $this-> browse(function(Browser $first){
-            $first  ->visit('https://accounts.chotot.com/')
-                    ->type('#content > div > div > div > div > form > input:nth-child(1)','0395608800')
-                    ->type('#content > div > div > div > div > form > input:nth-child(2)','23051998')
+    {       
+        $dangnhapdd = dangnhapdd::all()->first();
+        $tkddn = taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $baidang = baiviet::where('id_bv',$dangnhapdd->id_baidang)->first();
+        // dd($baidang);
+//  $tkdd = taikhoandd::all()->last();
+        $this-> browse(function(Browser $first)use($tkddn,$baidang){
+            $first->visit('https://accounts.chotot.com/')
+                    ->type('#content > div > div > div > div > form > input:nth-child(1)',$tkddn->sodienthoai)
+                    ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkddn->matkhau)
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->press('ĐĂNG NHẬP')
-                    ->pause(1500)
+                    ->pause(150000)
                     ->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(3) > div > a')
                     ->pause(1999)
                     ->clickLink('Dịch vụ, Du lịch')

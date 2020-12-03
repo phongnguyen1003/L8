@@ -53,6 +53,7 @@ Route::get('/suabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@suabaiv
 Route::get('/xoabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@xoabaiviet');
 Route::post('/update_bv/{id_bv}','App\Http\Controllers\BaiVietController@update_bv');
 Route::get('/dangbai','App\Http\Controllers\BaiVietController@dangbai');
+Route::get('/dangbaidd/{id_bv}','App\Http\Controllers\BaiVietController@dangbaidd');
 
 
 // Route::get('/xulydiendan','App\Http\Controllers\DienDanController@xulydiendan');

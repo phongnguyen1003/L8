@@ -41,16 +41,16 @@
             "sorting": {
               "enabled": true
             }}'>
-                               <thead style="text-align: center">
-                                        <tr>
-                                            <th data-breakpoints="xs">ID</th>
-                                            <th>Tên Bài Viết</th>
-                                            <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
-                                            <th style="width: 35%;">Nội Dung Bài Viết</th>
-                                            <th>Diễn Đàn</th>
-                                            <th data-breakpoints="xs sm md">Đăng Bài</th>
-                                        </tr>
-                                    </thead>
+                                <thead style="text-align: center">
+                                    <tr>
+                                        <th data-breakpoints="xs">ID</th>
+                                        <th>Tên Bài Viết</th>
+                                        <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
+                                        <th style="width: 35%;">Nội Dung Bài Viết</th>
+                                        <th>Diễn Đàn</th>
+                                        <th data-breakpoints="xs sm md">Đăng Bài</th>
+                                    </tr>
+                                </thead>
                                 <tbody style="text-align: center">
                                     @foreach ($all_baiviet as $key => $baiviet)
 
@@ -65,19 +65,27 @@
                                                 <option value="Chợ Tốt">Chợ Tốt</option>
                                                 <option value="Facebook">Facebook</option>
                                                 <option value="24h Quảng Cáo">24h Quảng Cáo</option>
-                                                 {{-- @foreach ($abc as $key => $dd)
-                                                  <option name="id_dd" value="{{$dd->id_dd}}">{{$dd->tendiendan}}</option>
+                                                {{-- @foreach ($abc as $key => $dd)
+                                                  <option name="id_dd" value="{{$dd->id_dd}}">{{$dd->tendiendan}}
+                                                </option>
                                                 @endforeach --}}
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-danger" style="margin-left: 15px"><a class="text-white" href="{{URL::to('/dangbai/'.$baiviet->id_bv)}}">Đăng Bài</a></button></td>
+                                        <td>
+                                            <button class="btn btn-danger" style="margin-left: 15px">
+                                                <a class="text-white" href="{{URL::to('/dangbaidd/'.$baiviet->id_bv)}}">
+                                                    Đăng Bài Viết
+                                                </a>
+                                            </button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    {{-- <button class="btn btn-info" style="margin-left: 450px;"><a class="text-white" href="{{URL::to('/taobaiviet')}}">THÊM BÀI VIẾT</a></button> --}}
+                    {{-- <button class="btn btn-info" style="margin-left: 450px;"><a class="text-white" href="{{URL::to('/taobaiviet')}}">THÊM
+                    BÀI VIẾT</a></button> --}}
 
                 </div>
             </section>

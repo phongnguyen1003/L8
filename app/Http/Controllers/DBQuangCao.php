@@ -109,7 +109,13 @@ class DBQuangCao extends Controller
             $table->foreign('id_ha')->references('id_ha')->on('HinhAnh');
             $table->timestamps();
         });
-
+//tao bảng tạm
+        Schema::create('dangnhapdd', function ($table) {
+            $table->increments('id');
+            $table->integer('id_tk')->nullable();;
+            $table->integer('id_baidang')->nullable();
+            $table->timestamps();
+        });
 
     	echo "tạo bảng thành công ";
 

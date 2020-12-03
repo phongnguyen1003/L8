@@ -11,11 +11,41 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Models\danhmuc;
 use App\Models\hinhanh;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 session_start();
 
 class BaiVietController extends Controller
 {
+    public function dangbaidd_auto() {
+        //cách gọi 1 command line 1a: trực tiếp,
+        // lấy tài khoản đang đăng nhập
+        $tkdd = taikhoandd::where("id_tk",Session::get('id_tk'))->first();
+        if($tkdd->tendiendan=="Chợ Tốt"){
+            $process = new Process(['php','artisan','dusk','--group=dangbaict']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="24h Quảng Cáo"){
+            $process = new Process(['php','artisan','dusk','--group=dangbai24hqc']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Facebook"){
+            $process = new Process(['php','artisan','dusk','--group=dangbaifb']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+       $process->run();
+
+        //bắt lỗi, hiện error
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+        echo '<pre>'.$process->getOutput();
+
+    }
+
     public function taobaiviet(){
         return view('pages.taobaiviet');
     }
@@ -35,6 +65,14 @@ class BaiVietController extends Controller
         //sửa lại chỉ lấy những bài viết có id==id thằng đang đăng nhập
         $all_baiviet = DB::table('baiviet')->get();
         return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
+    }
+
+    public function dangbaidd($id_bv){
+        DB::table('dangnhapdd')
+            ->where('id', 1)
+            ->update(['id_baidang' =>  $id_bv]);
+        $this->dangbaidd_auto();
+        //  chưa redirect ...
     }
 
     public function luuhinhanh(Request $request){

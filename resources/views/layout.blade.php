@@ -86,6 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu extended logout">
                             <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                             <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="{{URL::to('/doimatkhau')}}"><i class="fa fa-cog"></i> Đổi mật khẩu</a></li>
                             <li><a href="{{URL::to('/dangxuat')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                         </ul>
                     </li>

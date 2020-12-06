@@ -32,6 +32,9 @@ Route::post('/xulydangky','App\Http\Controllers\HomeController@xulydangky');
 Route::get('/dangxuat','App\Http\Controllers\HomeController@dangxuat');
 
 Route::get('/info','App\Http\Controllers\HomeController@Info');
+Route::get('/doimatkhau','App\Http\Controllers\HomeController@doimatkhau');
+Route::post('/updatematkhau','App\Http\Controllers\HomeController@updatematkhau');
+
  Route::post('/updateInfo','App\Http\Controllers\HomeController@updateInfo');
 
 
@@ -51,7 +54,7 @@ Route::post('/xulydangnhapdd','App\Http\Controllers\HomeController@xulydangnhapd
 Route::get('/taobaiviet','App\Http\Controllers\BaiVietController@taobaiviet');
 Route::get('/qlbaiviet','App\Http\Controllers\BaiVietController@qlbaiviet');
 Route::post('/luubaiviet','App\Http\Controllers\BaiVietController@luubaiviet');
-Route::get('/suabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@suabaiviet');
+Route::get('/xulysuabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@xulysuabaiviet');
 Route::get('/xoabaiviet/{id_bv}','App\Http\Controllers\BaiVietController@xoabaiviet');
 Route::post('/update_bv/{id_bv}','App\Http\Controllers\BaiVietController@update_bv');
 Route::get('/dangbai','App\Http\Controllers\BaiVietController@dangbai');

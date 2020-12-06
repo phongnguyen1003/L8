@@ -272,6 +272,29 @@ class HomeController extends Controller
         $ttnd = DB::table('nguoidung')->where('id_nd',$id)->get();
         return view('pages.info')->with('ttnd',$ttnd);
     }
+    public function doimatkhau()
+    {
+        return view('pages.doimatkhau');
+    }
+
+    public function updatematkhau(Request $req){
+        $user=DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))->first();
+        if($user){
+            if(Hash::check($req['oldPass'],$user->matkhau_nd)){
+            $validate=$req->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))
+            ->update(['matkhau_nd' =>  Hash::make($req['password'])]);
+
+            return redirect()->back()-> with('thanhcong','Đổi mật khẩu thành công');
+            }else{
+                return redirect()->back()->withErrors(['oldPass' => 'Mật khẩu cũ không chính xác.Vui lòng nhập lại']);
+            }
+        }else{
+            redirect()->back();
+        }
+    }
 
     public function updateInfo(Request $request){
         $id= session::get('id_nd');

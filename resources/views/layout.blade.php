@@ -70,7 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
-                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
+                            style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
                                 Hello,
                                 <?php
@@ -109,12 +109,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                         </li>
 
+                        @if(Session::has('id_tk'))
+                        <li>
+                            <a href="{{ URL::to('/dangxuatdd') }}">
+                                <i class="fa fa-check-square"></i>
+                                <span>Đăng xuất trên diễn đàn </span>
+                            </a>
+                        </li>
+                        @else
                         <li>
                             <a href="{{ URL::to('/dangnhapdd') }}">
                                 <i class="fa fa-check-square"></i>
                                 <span>Đăng nhập trên diễn đàn </span>
                             </a>
                         </li>
+                        @endif
+
 
                         <li>
                             <a href="{{ URL::to('/taobaiviet') }}">
@@ -222,4 +232,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 
 </html>
-

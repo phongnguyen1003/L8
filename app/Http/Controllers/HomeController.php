@@ -19,7 +19,6 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class HomeController extends Controller
 {
     public function home(){
-        Session::forget('message');
         return view('pages.home');
     }
 
@@ -76,26 +75,38 @@ class HomeController extends Controller
             Session::put('phuong', $result->phuong);
             Session::put('quan', $result->quan);
             Session::put('sodt', $result->sodienthoai);
-            // luu id vao bang tam
+            Session::put('diendan', $result->tendiendan);
+            // luu id vao d tam
             DB::table('dangnhapdd')
             ->updateOrInsert(
                 ['id' => 1],
                 ['id' => 1,'id_tk' => $result->id_tk]
             );
             $this->dangnhapdd_auto();
-            return Redirect::to('/trangchu');
+             return redirect('/dangnhapdd')->with('alert','Đăng nhập thành công!');
+
+            return Redirect::to('/dangnhapdd');
 
             // return redirect()->action([HomeController::class, 'home']);
         }else {
-            Session::put('message','Mật khẩu hoặc tài khoản không đúng. Mời nhập lại!');
-            return Redirect::to('/dangnhapdd');
+            return redirect('/dangnhapdd')->with('alert','Sai tài khoản,email hoặc mật khẩu.Vui lòng đăng nhập lại!');
+
+            // Session::put('message','Mật khẩu hoặc tài khoản không đúng. Mời nhập lại!');
+            // return Redirect::to('/dangnhapdd');
            // return redirect()->back();
         }
 
         //  return view('pages.dangnhapdd')->with('abc',$tendd);
     }
 
+    public function dangxuatdd(){
+        return view('pages.dangnhapdd');
+    }
 
+    public function xulydangxuatdd(){
+        Session::forget('id_tk');
+        return redirect('/dangnhapdd')->with('alert','Đăng xuất thành công');
+    }
 
     public function dangkydd(){
         return view('pages.dangkydd');

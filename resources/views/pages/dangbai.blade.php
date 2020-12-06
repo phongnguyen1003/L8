@@ -59,18 +59,8 @@
                                         <td>{{$baiviet->tenbaiviet}}</td>
                                         <td>{{$baiviet->tieude}}</td>
                                         <td>{{$baiviet->noidung}}</td>
+                                        <td>{{Session::get('diendan')}}</td>
 
-                                        <td>
-                                            <select style="margin-left: 5px" class="form-control" name="diendan">
-                                                <option value="Chợ Tốt">Chợ Tốt</option>
-                                                <option value="Facebook">Facebook</option>
-                                                <option value="24h Quảng Cáo">24h Quảng Cáo</option>
-                                                {{-- @foreach ($abc as $key => $dd)
-                                                  <option name="id_dd" value="{{$dd->id_dd}}">{{$dd->tendiendan}}
-                                                </option>
-                                                @endforeach --}}
-                                            </select>
-                                        </td>
                                         <td>
                                             <button class="btn btn-danger" style="margin-left: 15px">
                                                 <a class="text-white" href="{{URL::to('/dangbaidd/'.$baiviet->id_bv)}}">

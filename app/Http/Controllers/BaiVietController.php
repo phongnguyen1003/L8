@@ -62,9 +62,15 @@ class BaiVietController extends Controller
     }
 
     public function dangbai(){
+        // dd(Session::has('id_tk'));
+        if (Session::has('id_tk')) {
+            $all_baiviet = DB::table('baiviet')->where('id_tk',Session::get('id_tk'))->get();
+            return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
+        }else{
+            return redirect('/dangnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
+        }
         //sửa lại chỉ lấy những bài viết có id==id thằng đang đăng nhập
-        $all_baiviet = DB::table('baiviet')->get();
-        return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
+       
     }
 
     public function dangbaidd($id_bv){

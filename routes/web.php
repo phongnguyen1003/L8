@@ -38,6 +38,8 @@ Route::get('/info','App\Http\Controllers\HomeController@Info');
 //XỬ LÝ CỦA DIỄN ĐÀN
 Route::get('/dangkydd','App\Http\Controllers\HomeController@dangkydd');
 Route::get('/dangnhapdd','App\Http\Controllers\HomeController@dangnhapdd');
+Route::get('/dangxuatdd','App\Http\Controllers\HomeController@dangxuatdd');
+Route::get('/xulydangxuatdd','App\Http\Controllers\HomeController@xulydangxuatdd');
 Route::post('/xulydangkydd','App\Http\Controllers\HomeController@xulydangkydd');
 Route::post('/xulydangnhapdd','App\Http\Controllers\HomeController@xulydangnhapdd');
 

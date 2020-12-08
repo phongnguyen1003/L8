@@ -371,5 +371,8 @@ class HomeController extends Controller
         return view('layout');
     }
 
+    public function page404(){
+        return view('page404');
+    }
 
 }

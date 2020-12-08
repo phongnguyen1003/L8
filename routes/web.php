@@ -19,6 +19,7 @@ Route::get('/dbquangcao', [DBQuangCao::class, 'lquangcao']);		//CÁCH VIẾT M�
 //TRANG CHỦ
 Route::get('/trangchu','App\Http\Controllers\HomeController@home');
 Route::get('/layout','App\Http\Controllers\HomeController@layout');
+Route::get('/page404','App\Http\Controllers\HomeController@page404');
 
 // XỬ LÝ CỦA ỨNG DỤNG
 Route::get('/dangnhap','App\Http\Controllers\HomeController@dangnhap');

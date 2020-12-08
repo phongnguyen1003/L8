@@ -201,7 +201,17 @@ class HomeController extends Controller
                // 'tinh.required'=>'Vui lòng nhập tỉnh/thành phố!',
 
             ]);
-
+            //bắt lỗi trùng email sdt
+            $users = DB::table('taikhoandd')
+            ->where('tendiendan', $request->diendan)
+            ->where(function ($query)use($request) {
+               $query->orWhere('email',$request ->email)
+               ->orWhere('sodienthoai',$request ->sodienthoai)
+               ->orWhere('tendangnhap',$request ->tendangnhap);
+            })->first();
+            if ($users) {
+                return redirect()->back() -> with('thanhcong','Email,sdt hoặc tài khoản trùng với tk cũ');
+            }
             $id=session::get('id_nd');
 
             $tk = new taikhoandd();

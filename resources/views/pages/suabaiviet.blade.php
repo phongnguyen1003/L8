@@ -36,7 +36,7 @@
                             <label>Tên bài viết:</label>
                             <input value="{{$edit->tenbaiviet}}" type="text" class="form-control" name="tenbaiviet">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="exampleInputEmail1">Chọn tỉnh thành:</label>
                             <input disabled type="text" class="form-control" name="tinh" value="<?php echo Session::get('tinh') ?>">
                         </div>
@@ -48,7 +48,7 @@
                             <label>Phường, xã, thị trấn:</label>
                             <input disabled type="text" class="form-control" name="phuong" value="<?php echo Session::get('phuong') ?>">
 
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="exampleInputFile">Hình ảnh sản phẩm:</label>

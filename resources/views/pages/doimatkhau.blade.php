@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>Tạo bài viết</title>
+    <title>ĐỔI MẬT KHẨU</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
 <body>
     <section class="panel">
         <header class="panel-heading">
-            THÔNG TIN NGƯỜI DÙNG
+            THAY ĐỔI MẬT KHẨU
         </header>
         <div class="panel-body">
             <?php
@@ -32,10 +32,10 @@
                 <form role="form" method="post" action="{{URL::to('/updatematkhau')}}">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Mật khẩu cũ</label>
+                        <label>Mật khẩu hiện tại:</label>
                         <input type="password" class="form-control" name="oldPass">
                         @error('oldPass')
-                        <p>{{ $message }}</p>
+                        <p class="alert alert-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class=" form-group">
@@ -50,7 +50,7 @@
                         @enderror
                     </div>
                     <div class=" form-group">
-                        <label>Xác nhận mật khẩu mới</label>
+                        <label>Xác nhận mật khẩu mới:</label>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                             required autocomplete="new-password" placeholder="Confirm Password">
                     </div>

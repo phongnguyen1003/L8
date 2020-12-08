@@ -70,7 +70,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
-                            style="width: 30px; height: 30px; border-radius: 50%"> --}}
+                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
+                            <span class="username">
+                                <?php
+                                    $dd = Session::get('diendan');
+                                    if($dd){
+                                        echo $dd;
+                                    }
+
+                                ?>
+                                |
+                                <?php
+                                    $sdt = Session::get('sodt');
+                                    if($sdt){
+                                        echo $sdt;
+                                    }
+
+                                ?>
+                            </span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <li><a href="{{URL::to('/xulydangxuatdd')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
+                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
                                 Hello,
                                 <?php
@@ -84,9 +112,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                            <li><a href="{{URL::to('/doimatkhau')}}"><i class="fa fa-cog"></i> Đổi mật khẩu</a></li>
+                            <li><a href="{{URL::to('/info')}}"><i class=" fa fa-suitcase"></i>Hồ sơ</a></li>
+                            <li><a href="{{URL::to('/doimatkhau')}}"><i class="fa fa-cog"></i>Đổi mật khẩu</a></li>
                             <li><a href="{{URL::to('/dangxuat')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                         </ul>
                     </li>
@@ -104,47 +131,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <li>
-                            <a class="active" href="{{ URL::to('/trangchu') }}">
+                            <a  href="{{ URL::to('/trangchu') }}">
                                 <i class="fa fa-home"></i>
                                 <span>Home</span>
                             </a>
                         </li>
 
-                        @if(Session::has('id_tk'))
                         <li>
-                            <a href="{{ URL::to('/dangxuatdd') }}">
-                                <i class="fa fa-check-square"></i>
-                                <span>Đăng xuất trên diễn đàn </span>
-                            </a>
-                        </li>
-                        @else
-                        <li>
-                            <a href="{{ URL::to('/dangnhapdd') }}">
+                            <a  href="{{ URL::to('/dangnhapdd') }}">
                                 <i class="fa fa-check-square"></i>
                                 <span>Đăng nhập trên diễn đàn </span>
-                            </a>
-                        </li>
-                        @endif
-
-
-                        <li>
-                            <a href="{{ URL::to('/taobaiviet') }}">
-                                <i class="fa fa-plus-circle"></i>
-                                <span>Tạo bài viết</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ URL::to('/dangbai') }}">
-                                <i class="fa fa-upload"></i>
-                                <span>Đăng bài lên diễn đàn </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ URL::to('/qlbaiviet') }}">
-                                <i class="fa fa-briefcase"></i>
-                                <span>Quản lý bài viết </span>
                             </a>
                         </li>
 
@@ -155,7 +151,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                         </li>
 
-
+                        <li>
+                            <a href="{{ URL::to('/dangbai') }}">
+                                <i class="fa fa-upload"></i>
+                                <span>Đăng bài lên diễn đàn </span>
+                            </a>
+                        </li>
 
                         <li>
                             <a href="{{ URL::to('/suabaiviet') }}">
@@ -173,19 +174,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="">Lập lịch</a></li>
                             </ul>
                         </li> --}}
-                        <li>
+                        {{-- <li>
                             <a href="">
                                 <i class="fa fa-edit"></i>
                                 <span>Đo hiệu quả quảng cáo</span>
                             </a>
-                        </li>
+                        </li> --}}
 
-                        <li>
+                        {{-- <li>
                             <a href="">
                                 <i class="fa fa-hourglass-end"></i>
                                 <span>Lập lịch tự động</span>
                             </a>
+                        </li> --}}
+
+                        <li>
+                            <a href="{{ URL::to('/taobaiviet') }}">
+                                <i class="fa fa-plus-circle"></i>
+                                <span>Tạo bài viết</span>
+                            </a>
                         </li>
+
+                        <li>
+                            <a href="{{ URL::to('/qlbaiviet') }}">
+                                <i class="fa fa-briefcase"></i>
+                                <span>Quản lý bài viết </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ URL::to('/dstaikhoandd') }}">
+                                <i class="fa fa-edit"></i>
+                                <span>Danh sách tài khoản diễn đàn</span>
+                            </a>
+                        </li>
+
                         <li>
                             <a href="{{ URL::to('/info') }}">
                                 <i class="fa fa-user"></i>
@@ -210,6 +232,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 @yield('content_qlbaiviet')
                 @yield('content_suabai')
                 @yield('content_info')
+                @yield('content_dstaikhoandd')
 
             </section>
             <!-- footer -->
@@ -233,3 +256,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 
 </html>
+

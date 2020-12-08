@@ -5,12 +5,12 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\taikhoandd;
-use App\Models\dangnhapdd;
-use App\Models\baiviet;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-
+use App\Models\taikhoandd;
+use App\Models\luudangnhapdd;
+use App\Models\baiviet;
+use App\Models\hinhanh;
 
 class ExampleTest extends DuskTestCase
 {
@@ -29,13 +29,14 @@ class ExampleTest extends DuskTestCase
 
 
     //============================================CHỢ TỐT==============================================
+
     /**
      * @group dangkyct
      */
     public function  testDangKyCT()
     {
         $tkdd = taikhoandd::all()->last();
-        // dd($tkdd);
+        // dd($tkdd->sodienthoai);
         $this-> browse(function($first) use($tkdd){
 
             $first  ->visit('https://accounts.chotot.com/')
@@ -43,31 +44,36 @@ class ExampleTest extends DuskTestCase
                     ->type('#content > div > div > div > div > form > input:nth-child(1)',$tkdd->sodienthoai)
                     ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkdd->matkhau)
                     ->press('ĐĂNG KÝ')
-                    ->pause(5000)
-                    ->assertSee('Chợ Tốt');
+                    ->pause(59981);
+                    //nên thay lện pause cuối thành lệnh chờ do chỉ pause đc 60s
+                    //để thời gian dài để nhập mã xác thực gửi về điện thoại bằng tay
+                    // ->assertSee('Chợ Tốt');
         });
     }
 
     /**
-     * @group dangnhapct
+     * @group dangnhapchotot
      */
     public function  testDangNhapCT()
     {
+
         //lấy dữ liệu bảng tạm
-        $dangnhapdd = dangnhapdd::all()->first();
+        $dangnhapdd = luudangnhapdd::all()->first();
         // lấy dữ liệu thằng đang đang nhập
         $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
-        // dd($tkddddd);
+
         $this-> browse(function(Browser $first)use($tkddn){
             $first  ->visit('https://accounts.chotot.com/login?continue=https://www.chotot.com/')
                     //->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(2) > div')
                     ->pause(5000)
                     ->type('#content > div > div > div > div > form > input:nth-child(1)',$tkddn->sodienthoai)
+                    ->pause(4123)
                     ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkddn->matkhau)
+                    ->pause(3214)
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->pause(4000)
                     ->press('ĐĂNG NHẬP')
-                    ->pause(5000)
+                    ->pause(20001)
                     ->assertSee('Chợ Tốt');
         });
     }
@@ -76,19 +82,24 @@ class ExampleTest extends DuskTestCase
      * @group dangbaict
      */
     public function  testDangBaiCT()
-    {       
-        $dangnhapdd = dangnhapdd::all()->first();
+    {
+
+        $dangnhapdd = luudangnhapdd::all()->first();
         $tkddn = taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
         $baidang = baiviet::where('id_bv',$dangnhapdd->id_baidang)->first();
-        // dd($baidang);
-//  $tkdd = taikhoandd::all()->last();
-        $this-> browse(function(Browser $first)use($tkddn,$baidang){
-            $first->visit('https://accounts.chotot.com/')
+        $id_hinh = $baidang->id_ha;
+        $hinhanh = hinhanh::where('id_ha',$id_hinh)->first();
+
+        $this-> browse(function(Browser $first)use($tkddn,$baidang,$hinhanh){
+            $first  ->visit('https://accounts.chotot.com/')
                     ->type('#content > div > div > div > div > form > input:nth-child(1)',$tkddn->sodienthoai)
+                    ->pause(3500)
                     ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkddn->matkhau)
+                    ->pause(5105)
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
+                    ->pause(2103)
                     ->press('ĐĂNG NHẬP')
-                    ->pause(150000)
+                    ->pause(5007)
                     ->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(3) > div > a')
                     ->pause(1999)
                     ->clickLink('Dịch vụ, Du lịch')
@@ -97,29 +108,30 @@ class ExampleTest extends DuskTestCase
                     ->pause(1999)
                     ->clickLink('Cần bán')
                     ->pause(1999)
-                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div:nth-child(2) > div > select')
-                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(2) > div:nth-child(2) > div > select')
-                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(3) > div:nth-child(2) > div > select')
-                    ->pause(2999)
+                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div:nth-child(2) > div > select','13000')
+                    ->pause(2512)
+                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(2) > div:nth-child(2) > div > select','13104')
+                    ->pause(2157)
+                    ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(3) > div:nth-child(2) > div > select','9254')
+                    ->pause(2578)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
-                    ->pause(1999)
+                    ->pause(1971)
                     ->radio('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.text-center._1A31TKpr3aul3X8swjEql4 > div:nth-child(1)','#company_ad|0')
                     ->pause(2909)
-                  //  ->press('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > div > div._3wLdyQ1JXeAenU3yteGpQI > button')
-                  //  ->pause(29999)
-                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/images/g5.jpg'))
-                    ->pause(10000)
+                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/images/'.$hinhanh->tenhinh))
+                    ->pause(7124)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a')
-                    ->pause(1999)
-                    ->type('price','230')
-                    ->pause(1999)
+                    ->pause(5991)
+                    //k ăn chỗ giá bán
+                    ->type('price',$baidang->giaban)
+                    ->pause(2992)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
                    ->pause(1999)
-                   ->type('#subject','Dịch vụ test thôi')
+                   ->type('#subject',$baidang->tieude)
                    ->pause(1999)
                    ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
                    ->pause(999)
-                   ->type('body','Lê Thị Thùy Linh,tôi đang test thử dịch vụ đăng bài trên trang chợ tốt thôi nhé!!! eheheheheheheheheehhe')
+                   ->type('body',$baidang->noidung)
                    ->pause(1999)
                    ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a.btn.btn-lg.btn-default.btn-default-customized')
                    ->pause(1999)
@@ -393,25 +405,98 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    //======================================================
+    //======================================================NHẬT TẢO=================================
 
-// public function  testDangKy5s()
-//     {
-//         $this-> browse(function(Browser $first){
-//             $first  ->visit('https://www.5giay.vn/')
-//                     ->pause(2000)
-//                     ->click('#loginBarHandle > label > a')
-//                     ->pause(3000)
-//                     ->click('#login > div > dl.ctrlUnit.custom_register > dd > a')
-//                     ->pause(1000)
-//                     // ->waitForDialog($seconds = 5000)
-//                     // ->waitForReload ().
-//                     // ->waitForDialog($seconds = null)
+    /**
+     * @group dangnhapnhattao
+     */
 
-//                     ->type('#igo-new-register > .ctrlUnit.igo-phone-wrp >:input:visible:first',"20000")
-//                     ->pause(50000);
+    public function  testDangNhapNhatTao()
+    {
+        $this-> browse(function(Browser $first){
+            $first  ->visit('https://nhattao.com/')
+                    ->pause(2002)
+                    ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.headerBar-login.OverlayTrigger')
+                    ->pause(2501)
+                    ->type('#ctrl_pageLogin_login','0523931003')
+                    ->pause(2711)
+                    ->type('#ctrl_pageLogin_password','123456')
+                    ->pause(3512)
+                    ->press('.submitUnit > .button')
+                    ->pause(500005);
+        });
+    }
 
-//         });
-//     }
+     /**
+     * @group dangkynhattao
+     */
+
+    public function  testDangKyNhatTao()
+    {
+        $this-> browse(function(Browser $first){
+            $first  ->visit('https://nhattao.com/')
+                    ->pause(2002)
+                    ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.OverlayTrigger.headerBar-register')
+                    ->pause(2501)
+                    ->type('form > div:nth-child(6) > .floatInput','0332077070')
+                    ->pause(2711)
+                    ->type('form > div:nth-child(7) > .fieldPassword','123456')
+                    ->pause(2731)
+                    ->type('form > div:nth-child(8) > .floatInput','123456')
+                    ->pause(2415)
+                    ->type('form > div.dobField > div:nth-child(1) > input[name="dob_day"]','23')
+                    ->pause(2147)
+                    ->select('form > div.dobField > div.dobMonth > select[name="dob_month"]','5')
+                    ->pause(2715)
+                    ->select('form > div.dobField > div.dobYear > select[name="dob_year"]','1998')
+                    ->pause(3512)
+                    ->select('form > .fieldGender','female')
+                    ->pause(2451)
+                    ->press('.submitUnit > .button')
+                    ->pause(500005);
+                    //đợi và nhập mã xác thực
+        });
+    }
+
+     /**
+     * @group dangbainhattao
+     */
+    public function  testDangBaiNhatTao()
+        {
+            $this-> browse(function(Browser $first){
+                $first  ->visit('https://nhattao.com/')
+                        ->pause(2002)
+                        ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.headerBar-login.OverlayTrigger')
+                        ->pause(2501)
+                        ->type('#ctrl_pageLogin_login','0523931003')
+                        ->pause(2711)
+                        ->type('#ctrl_pageLogin_password','123456')
+                        ->pause(3512)
+                        ->press('.submitUnit > .button')
+                        ->pause(2345)
+                        ->click('#header > div.pageWidth > div > div > div.headerBar-right > a')
+                        ->pause(2151)
+                        ->type('#ctrl_title_thread_create','Test dịch vụ du lịch')
+                        ->pause(2012)
+                        ->attach('#ctrl_xfServerUniqueId2',storage_path('app/public/images/g5.jpg'))
+                        ->pause(2312)
+                        ->type('#ctrl_GlobalCreator_classified_price','1500000')
+                        ->check('#ctrl_classified_message_html_enabled')
+                        ->pause(2113)
+                        ->type('#ctrl_description_hider > textarea','Test bán tua du lịch')
+                        ->pause(5523)
+                        ->press('.NhattaoMods_FormStep1 > .button')
+                        ->pause(3212)
+                        //do website không có danh mục dịch vụ du lịch nên cho chọn 1 danh mục khác
+                        ->select('.GlobalCreator_ThreadFormStep > .GlobalCreator_ThreadFormNodeAuto > li > .NhattaoMods_TextField','675')
+                        ->pause(2141)
+                        ->select('node_id')
+                        ->pause(2541)
+                        ->radio('#ctrl_classified_status1','1')
+                        ->pause(2542)
+                        ->press('Đăng bán')
+                        ->pause(500002);
+            });
+        }
 
 }

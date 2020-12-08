@@ -46,7 +46,7 @@
                                             <th data-breakpoints="xs">ID</th>
                                             <th>Tên Bài Viết</th>
                                             <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
-                                            <th>ID Tài Khoản Đăng Bài</th>
+                                            <th style="width: 35%;">Nội Dung Bài Viết</th>
 
                                             <th data-breakpoints="xs sm md">Sửa Bài Viết</th>
                                             <th data-breakpoints="xs sm md">Xóa Bài Viết</th>
@@ -59,7 +59,7 @@
                                             <td>{{$baiviet->id_bv}}</td>
                                             <td>{{$baiviet->tenbaiviet}}</td>
                                             <td>{{$baiviet->tieude}}</td>
-                                            <td>{{$baiviet->id_tk}}</td>
+                                            <td style="text-align: justify">{{$baiviet->noidung}}</td>
 
                                             <td><button class="btn btn-danger" style="margin-left: 15px"><a class="text-white" href="{{URL::to('/suabaiviet/'.$baiviet->id_bv)}}">Sửa</a></button></td>
                                             <td><button class="btn btn-danger" style="margin-left: 15px"><a onclick="return confirm('Bạn có chắc muốn xóa bài viết này không?')" class="text-white" href="{{URL::to('/xoabaiviet/'.$baiviet->id_bv)}}">Xóa</a></button></td>

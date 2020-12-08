@@ -29,10 +29,11 @@ class HomeController extends Controller
 
     public function dangnhapdd_auto() {
         //cách gọi 1 command line 1a: trực tiếp,
-        // lấy tài khoản đang đăng nhập
-        $tkdd = taikhoandd::where("id_tk",Session::get('id_tk'))->first();
+        //lấy tài khoản đang đăng nhập
+        $tkdd = taikhoandd::where('id_tk',Session::get('id_tk'))->first();
+
         if($tkdd->tendiendan=="Chợ Tốt"){
-            $process = new Process(['php','artisan','dusk','--group=dangnhapct']
+            $process = new Process(['php','artisan','dusk','--group=dangnhapchotot']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
         if($tkdd->tendiendan=="24h Quảng Cáo"){
@@ -61,6 +62,24 @@ class HomeController extends Controller
     }
 
     public function xulydangnhapdd(Request $request){
+
+
+        $this->validate($request,
+        [
+            'email'=>'required|email',
+            'sodienthoai'=>'required',
+            'password'=>'required|min:6',
+
+        ],
+        [
+            'email.required'=>'Vui lòng nhập email!',
+            'email.email'=>'Không đúng định dạng email!',
+            'password.required'=>'Vui lòng nhập mật khẩu!',
+            'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự!',
+            'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
+
+        ]);
+
         $email = $request->email;
         $sodienthoai = $request->sodienthoai;
         $pass = $request->password;
@@ -71,42 +90,32 @@ class HomeController extends Controller
 
         if($result){
             Session::put('id_tk', $result->id_tk);
-            Session::put('tinh', $result->tinh);
-            Session::put('phuong', $result->phuong);
-            Session::put('quan', $result->quan);
+            // Session::put('tinh', $result->tinh);
+            // Session::put('phuong', $result->phuong);
+            // Session::put('quan', $result->quan);
             Session::put('sodt', $result->sodienthoai);
             Session::put('diendan', $result->tendiendan);
-            // luu id vao d tam
-            DB::table('dangnhapdd')
-            ->updateOrInsert(
-                ['id' => 1],
-                ['id' => 1,'id_tk' => $result->id_tk]
-            );
+
+            //luu id vào bảng tạm
+            DB::table('luudangnhapdd')->updateOrInsert(['id'=>1],['id'=>1,'id_tk'=>$result->id_tk]);
+
             $this->dangnhapdd_auto();
-             return redirect('/dangnhapdd')->with('alert','Đăng nhập thành công!');
+            return redirect('/dangbai')->with('alert','Đăng nhập thành công!');
 
             return Redirect::to('/dangnhapdd');
-
             // return redirect()->action([HomeController::class, 'home']);
         }else {
             return redirect('/dangnhapdd')->with('alert','Sai tài khoản,email hoặc mật khẩu.Vui lòng đăng nhập lại!');
 
-            // Session::put('message','Mật khẩu hoặc tài khoản không đúng. Mời nhập lại!');
-            // return Redirect::to('/dangnhapdd');
+           // Session::put('message','Mật khẩu hoặc tài khoản không đúng. Mời nhập lại!');
+           // return Redirect::to('/dangnhapdd');
            // return redirect()->back();
         }
 
         //  return view('pages.dangnhapdd')->with('abc',$tendd);
     }
 
-    public function dangxuatdd(){
-        return view('pages.dangnhapdd');
-    }
 
-    public function xulydangxuatdd(){
-        Session::forget('id_tk');
-        return redirect('/dangnhapdd')->with('alert','Đăng xuất thành công');
-    }
 
     public function dangkydd(){
         return view('pages.dangkydd');
@@ -158,10 +167,10 @@ class HomeController extends Controller
                 'sodienthoai'=>'required|unique:taikhoandd,sodienthoai',
                 'password'=>'required',
                 'password_confirm'=>'required|same:password',
-                'diachi'=>'required',
-                'phuong'=>'required',
-                'quan'=>'required',
-                'tinh'=>'required'
+               // 'diachi'=>'required',
+               // 'phuong'=>'required',
+               //'quan'=>'required',
+               // 'tinh'=>'required'
             ],
             [
                 'email.required'=>'Vui lòng nhập email!',
@@ -172,10 +181,10 @@ class HomeController extends Controller
                 'password_confirm.same'=>'Mật khẩu không khớp!',
                 'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
                 'sodienthoai.unique'=>'Số điện thoại đã có người sử dụng!',
-                'diachi.required'=>'Vui lòng nhập địa chỉ!',
-                'phuong.required'=>'Vui lòng nhập phường/xã!',
-                'quan.required'=>'Vui lòng nhập quận/huyện!',
-                'tinh.required'=>'Vui lòng nhập tỉnh/thành phố!',
+               // 'diachi.required'=>'Vui lòng nhập địa chỉ!',
+               // 'phuong.required'=>'Vui lòng nhập phường/xã!',
+               // 'quan.required'=>'Vui lòng nhập quận/huyện!',
+               // 'tinh.required'=>'Vui lòng nhập tỉnh/thành phố!',
 
             ]);
 
@@ -187,10 +196,13 @@ class HomeController extends Controller
             $tk->tendangnhap = $request ->tendangnhap;
             $tk->sodienthoai = $request ->sodienthoai;
             $tk->matkhau = $request->password;
-            $tk->diachi = $request->diachi;
-            $tk->phuong = $request->phuong;
-            $tk->quan = $request->quan;
-            $tk->tinh = $request->tinh;
+            $tk->ngaysinh=$request->ngaysinh;
+            $tk->thangsinh=$request->thangsinh;
+            $tk->namsinh=$request->namsinh;
+           // $tk->diachi = $request->diachi;
+           // $tk->phuong = $request->phuong;
+           // $tk->quan = $request->quan;
+           // $tk->tinh = $request->tinh;
             $tk->tendiendan = $request->diendan;
             // $tk->id_dd = $request->diendan;
             $tk->id_nd = $id;
@@ -200,6 +212,15 @@ class HomeController extends Controller
             return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');
 
         }
+
+    // public function dangxuatdd(){
+    //     return view('pages.dangnhapdd');
+    // }
+
+    public function xulydangxuatdd(){
+        Session::forget(['id_tk','sodt','diendan']);
+        return redirect('/dangnhapdd')->with('alert','Đăng xuất thành công');
+    }
 
 
     public function dangnhap(){
@@ -266,34 +287,12 @@ class HomeController extends Controller
     }
 
 
+    //thông tin người dùng
     public function Info()
     {
         $id= session::get('id_nd');
         $ttnd = DB::table('nguoidung')->where('id_nd',$id)->get();
         return view('pages.info')->with('ttnd',$ttnd);
-    }
-    public function doimatkhau()
-    {
-        return view('pages.doimatkhau');
-    }
-
-    public function updatematkhau(Request $req){
-        $user=DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))->first();
-        if($user){
-            if(Hash::check($req['oldPass'],$user->matkhau_nd)){
-            $validate=$req->validate([
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))
-            ->update(['matkhau_nd' =>  Hash::make($req['password'])]);
-
-            return redirect()->back()-> with('thanhcong','Đổi mật khẩu thành công');
-            }else{
-                return redirect()->back()->withErrors(['oldPass' => 'Mật khẩu cũ không chính xác.Vui lòng nhập lại']);
-            }
-        }else{
-            redirect()->back();
-        }
     }
 
     public function updateInfo(Request $request){
@@ -315,6 +314,43 @@ class HomeController extends Controller
         return Redirect::to('/dangnhap');
     }
 
+    //ĐỔI MẬT KHẨU NGƯỜI DÙNG
+    public function doimatkhau()
+    {
+        return view('pages.doimatkhau');
+    }
+
+    public function updatematkhau(Request $req){
+        $user=DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))->first();
+        if($user){
+            if(Hash::check($req['oldPass'],$user->matkhau_nd)){
+            $validate=$req->validate([
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            ],
+            ['password.required'=>'Vui lòng nhập mật khẩu',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
+            'password.confirmed' => 'Mật khẩu không khớp, mời nhập lại'
+            ]
+        );
+            DB::table('nguoidung')->where('id_nd',Session::get('id_nd'))
+            ->update(['matkhau_nd' =>  Hash::make($req['password'])]);
+
+            return redirect()->back()-> with('thanhcong','Đổi mật khẩu thành công');
+            }else{
+                return redirect()->back()->withErrors(['oldPass' => 'Mật khẩu cũ không chính xác.Vui lòng nhập lại']);
+            }
+        }else{
+            redirect()->back();
+        }
+    }
+
+    //DANH SÁCH TÀI KHOẢN CỦA DIỄN ĐÀN
+
+    public function dstaikhoandd(){
+        $all_taikhoandd = DB::table('taikhoandd')->get();
+        return view('pages.dstaikhoandd')->with('all_taikhoandd',$all_taikhoandd);
+
+    }
 
 
     public function layout(){

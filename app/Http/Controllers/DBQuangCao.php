@@ -34,11 +34,13 @@ class DBQuangCao extends Controller
             $table->string('email', 50)->unique();
             $table->string('sodienthoai', 10)->unique();
             $table->text('matkhau');
-           // $table->string('matkhau', 20);
-            $table->string('diachi',100);
-            $table->string('phuong', 50);
-            $table->string('quan', 50);
-            $table->string('tinh', 50);
+            $table->string('ngaysinh', 10);
+            $table->string('thangsinh', 10);
+            $table->string('namsinh', 10);
+            // $table->string('diachi',100);
+            // $table->string('phuong', 50);
+            // $table->string('quan', 50);
+            // $table->string('tinh', 50);
             $table->string('tendiendan', 50);
             // $table->integer('id_dd')->unsigned();
             // $table->foreign('id_dd')->references('id_dd')->on('DienDan');
@@ -95,8 +97,8 @@ class DBQuangCao extends Controller
             $table->string('tieude', 50);
             $table->string('noidung', 1500);
             $table->integer('giaban');
-            $table->integer('id_tk')->unsigned();
-            $table->foreign('id_tk')->references('id_tk')->on('TaiKhoanDD');
+            // $table->integer('id_tk')->unsigned();
+            // $table->foreign('id_tk')->references('id_tk')->on('TaiKhoanDD');
             $table->integer('id_dm')->unsigned();
             $table->foreign('id_dm')->references('id_dm')->on('DanhMuc');
             $table->integer('id_lt')->unsigned();
@@ -109,8 +111,18 @@ class DBQuangCao extends Controller
             $table->foreign('id_ha')->references('id_ha')->on('HinhAnh');
             $table->timestamps();
         });
-//tao bảng tạm
-        Schema::create('dangnhapdd', function ($table) {
+
+
+        Schema::create('ChiTietBaiViet', function ($table) {
+            // $table->increments('id');
+            $table->integer('id_bv')->unsigned();
+            $table->integer('id_tk')->unsigned();
+            $table->timestamps();
+        });
+
+
+        //tao bảng tạm
+        Schema::create('luudangnhapdd', function ($table) {
             $table->increments('id');
             $table->integer('id_tk')->nullable();;
             $table->integer('id_baidang')->nullable();

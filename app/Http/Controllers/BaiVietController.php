@@ -11,13 +11,30 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Models\danhmuc;
 use App\Models\hinhanh;
+use App\Models\taikhoandd;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 session_start();
 
 class BaiVietController extends Controller
 {
+    public function taobaiviet(){
+        return view('pages.taobaiviet');
+    }
+
+    public function suabaiviet($id_bv){
+         $sua_baiviet = DB::table('baiviet')->where('id_bv',$id_bv)->get();
+         return view('pages.suabaiviet')->with('sua_bv',$sua_baiviet);
+       // return view('pages.suabaiviet');
+    }
+
+    public function qlbaiviet(){
+        $all_baiviet = DB::table('baiviet')->get();
+        return view('pages.qlbaiviet')->with('all_baiviet',$all_baiviet);
+    }
+
     public function dangbaidd_auto() {
         //cách gọi 1 command line 1a: trực tiếp,
         // lấy tài khoản đang đăng nhập
@@ -46,39 +63,35 @@ class BaiVietController extends Controller
 
     }
 
-    public function taobaiviet(){
-        return view('pages.taobaiviet');
-    }
 
-    public function suabaiviet($id_bv){
-         $sua_baiviet = DB::table('baiviet')->where('id_bv',$id_bv)->get();
-         return view('pages.suabaiviet')->with('sua_bv',$sua_baiviet);
-       // return view('pages.suabaiviet');
-    }
-
-    public function qlbaiviet(){
-        $all_baiviet = DB::table('baiviet')->get();
-        return view('pages.qlbaiviet')->with('all_baiviet',$all_baiviet);
-    }
 
     public function dangbai(){
-        // dd(Session::has('id_tk'));
-        if (Session::has('id_tk')) {
-            $all_baiviet = DB::table('baiviet')->where('id_tk',Session::get('id_tk'))->get();
+        //sửa lại chỉ lấy những bài viết có id==id thằng đang đăng nhập
+    //    if(Session::has('id_tk')){
+    //        $all_baiviet=DB::table('baiviet')->where('id_tk',Session::get('id_tk'))->get();
+    //         return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
+    //     }
+    //     else{
+    //         return redirect('/danhnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
+    //     }
+
+        if(Session::has('id_tk')){
+            $all_baiviet = DB::table('baiviet')->get();
             return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
-        }else{
+        }
+        else{
             return redirect('/dangnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
         }
-        //sửa lại chỉ lấy những bài viết có id==id thằng đang đăng nhập
-       
+
     }
 
     public function dangbaidd($id_bv){
-        DB::table('dangnhapdd')
+        DB::table('luudangnhapdd')
             ->where('id', 1)
             ->update(['id_baidang' =>  $id_bv]);
         $this->dangbaidd_auto();
-        //  chưa redirect ...
+        return redirect('/dangbai')-> with('dangbai','Đăng bài thành công');
+
     }
 
     public function luuhinhanh(Request $request){
@@ -126,7 +139,7 @@ class BaiVietController extends Controller
         $data['tieude']= $request->tieude;
         $data['noidung']= $request->noidung;
         $data['giaban']= $request->giaban;
-        $data['id_tk']= Session::get('id_tk');
+        // $data['id_tk']= Session::get('id_tk');
         $data['id_dm']= $dm->id_dm;
         $data['id_lt']= $lt->id_lt;
         $data['id_qm']= $qm->id_qm;

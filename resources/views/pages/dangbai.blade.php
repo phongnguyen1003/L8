@@ -23,10 +23,10 @@
                             ĐĂNG BÀI VIẾT
                         </div>
                         <?php
-                        $message = Session::get('message');
-                        if($message){
-                            echo '<span class="text-alert">'.$message.'</span>';
-                            Session::put('message',null);
+                        $dangbai = Session::get('dangbai');
+                        if($dangbai){
+                            echo '<span class="text-alert">'.$dangbai.'</span>';
+                            Session::put('dangbai',null);
                         }
 
                         ?>
@@ -41,16 +41,16 @@
             "sorting": {
               "enabled": true
             }}'>
-                                <thead style="text-align: center">
-                                    <tr>
-                                        <th data-breakpoints="xs">ID</th>
-                                        <th>Tên Bài Viết</th>
-                                        <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
-                                        <th style="width: 35%;">Nội Dung Bài Viết</th>
-                                        <th>Diễn Đàn</th>
-                                        <th data-breakpoints="xs sm md">Đăng Bài</th>
-                                    </tr>
-                                </thead>
+                               <thead style="text-align: center">
+                                        <tr>
+                                            <th data-breakpoints="xs">ID</th>
+                                            <th>Tên Bài Viết</th>
+                                            <th data-breakpoints="xs">Tiêu Đề Bài Viết</th>
+                                            <th style="width: 35%;">Nội Dung Bài Viết</th>
+                                            <th>Diễn Đàn</th>
+                                            <th data-breakpoints="xs sm md">Đăng Bài</th>
+                                        </tr>
+                                    </thead>
                                 <tbody style="text-align: center">
                                     @foreach ($all_baiviet as $key => $baiviet)
 
@@ -58,13 +58,24 @@
                                         <td>{{$baiviet->id_bv}}</td>
                                         <td>{{$baiviet->tenbaiviet}}</td>
                                         <td>{{$baiviet->tieude}}</td>
-                                        <td>{{$baiviet->noidung}}</td>
-                                        <td>{{Session::get('diendan')}}</td>
+                                        <td style="text-align: justify">{{$baiviet->noidung}}</td>
+                                        <td> {{Session::get('diendan')}} </td>
 
+                                         {{-- <td>
+                                            <select style="margin-left: 5px" class="form-control" name="diendan">
+                                                <option value="Chợ Tốt">Chợ Tốt</option>
+                                                <option value="Facebook">Facebook</option>
+                                                <option value="24h Quảng Cáo">24h Quảng Cáo</option>
+
+                                                @foreach ($abc as $key => $dd)
+                                                  <option name="id_dd" value="{{$dd->id_dd}}">{{$dd->tendiendan}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td> --}}
                                         <td>
                                             <button class="btn btn-danger" style="margin-left: 15px">
                                                 <a class="text-white" href="{{URL::to('/dangbaidd/'.$baiviet->id_bv)}}">
-                                                    Đăng Bài Viết
+                                                    Đăng Bài
                                                 </a>
                                             </button>
                                         </td>
@@ -74,8 +85,7 @@
                             </table>
                         </div>
                     </div>
-                    {{-- <button class="btn btn-info" style="margin-left: 450px;"><a class="text-white" href="{{URL::to('/taobaiviet')}}">THÊM
-                    BÀI VIẾT</a></button> --}}
+                    {{-- <button class="btn btn-info" style="margin-left: 450px;"><a class="text-white" href="{{URL::to('/taobaiviet')}}">THÊM BÀI VIẾT</a></button> --}}
 
                 </div>
             </section>

@@ -13,34 +13,37 @@
     </head>
 
     <body>
-        <div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/Chotot-Logo-480x297.png') }}">
-            </a>
-        </div>
-        <div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/images.jpg') }}">
-            </a>
-        </div>
-        <div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/tải xuống.jpg') }}">
-            </a>
-        </div>
-        <div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/logo-rao-vat-net.png') }}">
-            </a>
-        </div><div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/unnamed (1).jpg') }}">
-            </a>
-        </div><div class="col-4 home__logo--items">
-            <a href="">
-                <img alt="" src="{{ asset('backend/images/YouTube-Face-Blur-Tool.jpg') }}">
-            </a>
-        </div>
+            <div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/Chotot-Logo-480x297.png') }}">
+                </a>
+            </div>
+            <div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/images.jpg') }}">
+                </a>
+            </div>
+            <div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/tải xuống.jpg') }}">
+                </a>
+            </div>
+
+            <div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/logo-rao-vat-net.png') }}">
+                </a>
+            </div><div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/unnamed (1).jpg') }}">
+                </a>
+            </div><div class="col-4 home__logo--items">
+                <a href="">
+                    <img alt="" src="{{ asset('backend/images/YouTube-Face-Blur-Tool.jpg') }}">
+                </a>
+            </div>
+
+
 
 
     </body>

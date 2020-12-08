@@ -33,10 +33,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <input type="text" class="ggg" name="tendangnhap" placeholder="TÊN ĐĂNG NHẬP" required="">
         <input type="password" class="ggg" name="password" placeholder="MẬT KHẨU" required="">
         <input type="password" class="ggg" name="password_confirm" placeholder="NHẬP LẠI MẬT KHẨU" required="">
-        <input type="text" class="ggg" name="diachi" placeholder="ĐỊA CHỈ" required="">
+        <div class="date" style="display: flex;">
+            <input style="margin-right: 10px" type="text" class="ggg" name="ngaysinh" placeholder="NGÀY SINH" required="">
+            <input style="margin-right: 10px" type="text" class="ggg" name="thangsinh" placeholder="THÁNG SINH" required="">
+            <input type="text" class="ggg" name="namsinh" placeholder="NĂM SINH" required="">
+        </div>
+        {{-- <input type="text" class="ggg" name="diachi" placeholder="ĐỊA CHỈ" required="">
         <input type="text" class="ggg" name="phuong" placeholder="PHƯỜNG/XÃ" required="">
         <input type="text" class="ggg" name="quan" placeholder="QUẬN/HUYỆN" required="">
-        <input type="text" class="ggg" name="tinh" placeholder="TỈNH/THÀNH PHỐ" required="">
+        <input type="text" class="ggg" name="tinh" placeholder="TỈNH/THÀNH PHỐ" required=""> --}}
         <select class="form-control input-lg m-bot15 ggg" name="diendan">
             <option value="Chợ Tốt">Chợ Tốt</option>
             <option value="Facebook">Facebook</option>

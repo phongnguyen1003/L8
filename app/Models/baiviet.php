@@ -10,9 +10,19 @@ class baiviet extends Model
     use HasFactory;
     protected $table='BaiViet';
 
-    public function taikhoandd()
+    // public function taikhoandd()
+    // {
+    // 	return $this->belongsTo('taikhoandd');
+    // }
+
+    // public function taikhoandd()
+    // {
+    // 	return $this->belongsToMany(taikhoandd::class);
+    // }
+
+    public function chitietbaiviet()
     {
-    	return $this->belongsTo('taikhoandd');
+        return $this->hasMany('chitietbaiviet');
     }
 
     public function quymo()

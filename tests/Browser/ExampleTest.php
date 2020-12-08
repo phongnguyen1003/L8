@@ -175,16 +175,22 @@ class ExampleTest extends DuskTestCase
      * @group dangnhapmr
      */
     public function testDangNhapMR(){
-        $this -> browse(function(Browser $first){
-            $first  -> visit('https://muare.vn/')
-                    -> click('#app > header > div.header.container > div > div.col-lg-3.col-sm-5.col-md-4.col-xs-12 > div.login > a')
-                    -> pause(2999)
+         //lấy dữ liệu bảng tạm
+         $dangnhapdd = luudangnhapdd::all()->first();
+         // lấy dữ liệu thằng đang đang nhập
+         $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $this -> browse(function(Browser $first)use($tkddn){
+            $first  -> visit('https://muare.vn/login')
+                   // -> click('#app > header > div.header.container > div > div.col-lg-3.col-sm-5.col-md-4.col-xs-12 > div.login > a')
+                    -> pause(2978)
                     -> radio('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1)','#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1) > input')
-                    -> type('#name','manhlinh23')
-                    -> type('#password','23051998')
+                    -> pause(2154)
+                    -> type('#name',$tkddn->tendangnhap)
+                    -> pause(2874)
+                    -> type('#password',$tkddn->matkhau)
                     -> check('remember')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(7) > div > button')
-                    -> pause(10000);
+                    -> pause(25784);
         });
     }
 
@@ -242,15 +248,21 @@ class ExampleTest extends DuskTestCase
      * @group dangnhapfb
      */
     public function  testDangNhapfb()
-    {
-        $this-> browse(function(Browser $first){
+    {   //lấy dữ liệu bảng tạm
+        $dangnhapdd = luudangnhapdd::all()->first();
+        // lấy dữ liệu thằng đang đang nhập
+        $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+
+        $this-> browse(function(Browser $first)use($tkddn){
             $first  ->visit('https://www.facebook.com/')
-                    ->type('email','linhbathai@gmail.com')
-                    ->type('pass','23051998')
+                    ->pause(2415)
+                    ->type('email',$tkddn->email)
+                    ->pause(2321)
+                    ->type('pass',$tkddn->matkhau)
                     ->pause(2999)
                     ->press('login')
-                    ->pause(4999)
-                    ->assertSee('facebook');
+                    ->pause(15142);
+
         });
     }
 
@@ -260,23 +272,33 @@ class ExampleTest extends DuskTestCase
 
     public function  testDangKyfb()
     {
-        $this-> browse(function(Browser $first){
+        $tkdd = taikhoandd::all()->last();
+        $this-> browse(function(Browser $first)use($tkdd){
             $first  ->visit('https://www.facebook.com/')
                     ->pause(2000)
                     ->click('#u_0_2')
                     ->pause(3000)
                     ->type('lastname','Trâu')
+                    ->pause(1512)
                     ->type('firstname','Trâu')
-                    ->type('reg_email__','thuylinh23598@gmail.com')
-                    ->type('#u_1_j','thuylinh23598@gmail.com')
-                    ->type('#password_step_input','23051998')
-                    ->select('#day','23')
-                    ->select('#month','Tháng 5')
-                    ->select('#year','1998')
+                    ->pause(2541)
+                    ->type('reg_email__',$tkdd->email)
+                    ->pause(2145)
+                    ->type('#u_1_j',$tkdd->email)
+                    ->pause(1547)
+                    ->type('#password_step_input',$tkdd->matkhau)
+                    ->pause(2153)
+                    ->select('#day',$tkdd->ngaysinh)
+                    ->pause(1784)
+                    ->select('#month',$tkdd->thangsinh)
+                    ->pause(1873)
+                    ->select('#year',$tkdd->namsinh)
+                    ->pause(1478)
                     ->radio('#u_1_o > span:nth-child(1)','#u_1_4')
+                    ->pause(2101)
                     ->press('#u_1_s')
-                    ->pause(49999)
-                    ->assertSee('facebook');
+                    ->pause(49871);
+
         });
     }
 
@@ -285,25 +307,30 @@ class ExampleTest extends DuskTestCase
      */
     public function  testDangBaiHoiNhomfb()
     {
-        $this->browse(function (Browser $first) {
+        $dangnhapdd = luudangnhapdd::all()->first();
+        $tkddn = taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $baidang = baiviet::where('id_bv',$dangnhapdd->id_baidang)->first();
+        $id_hinh = $baidang->id_ha;
+        $hinhanh = hinhanh::where('id_ha',$id_hinh)->first();
+        $this->browse(function(Browser $first)use($tkddn,$baidang,$hinhanh) {
             $first->visit('https://www.facebook.com/')
-                ->type('email', 'linhbathai@gmail.com')
-                ->type('pass', '23051998')
+                ->type('email', $tkddn->email)
+                ->pause(2145)
+                ->type('pass', $tkddn->matkhau)
                 ->pause(2999)
                 ->press('login')
                 ->pause(1999)
                 ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.taijpn5t.gs1a9yip.owycx6da.btwxx1t3.dp1hu0rb.p01isnhg > div > div.rq0escxv.lpgh02oy.du4w35lb.pad24vr5.rirtxc74.dp1hu0rb.fer614ym.bx45vsiw.o387gat7.qbu88020.ni8dbmo4.stjgntxs.czl6b2yu > div > div > div.j83agx80.cbu4d94t.buofh1pr > div > div > div.buofh1pr > div:nth-child(3) > ul > li > div > a')
-                ->pause(5999)
+                ->pause(4816)
                 ->press('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div.rq0escxv.l9j0dhe7.du4w35lb > div > div > div.j83agx80.cbu4d94t.d6urw2fd.dp1hu0rb.l9j0dhe7.du4w35lb > div.l9j0dhe7.dp1hu0rb.cbu4d94t.j83agx80 > div.j83agx80.cbu4d94t > div > div > div > div > div.rq0escxv.l9j0dhe7.du4w35lb.qmfd67dx.hpfvmrgz.gile2uim.buofh1pr.g5gj957u.aov4n071.oi9244e8.bi6gxh9e.h676nmdw.aghb5jc5 > div:nth-child(1) > div > div > div > div.bp9cbjyn.j83agx80.ihqw7lf3.hv4rvrfc.dati1w0a.pybr56ya > div')
-                ->pause(5900)
-                ->type('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.q5bimw55.rpm2j7zs.k7i0oixp.gvuykj2m.j83agx80.cbu4d94t.ni8dbmo4.eg9m0zos.l9j0dhe7.du4w35lb.ofs802cu.pohlnb88.dkue75c7.mb9wzai9.l56l04vs.r57mb794.kh7kg01d.c3g1iek1.buofh1pr > div.j83agx80.cbu4d94t.buofh1pr > div.o6r2urh6.buofh1pr.datstx6m.l9j0dhe7.oh7imozk > div.rq0escxv.buofh1pr.df2bnetk.hv4rvrfc.dati1w0a.l9j0dhe7.k4urcfbm.du4w35lb.gbhij3x4 > div > div > div > div > div._5rpb > div', 'love VN')
-                ->pause(3999)
-                ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div > div > div > div',storage_path('app/public/images/g5.jpg'))
-                // ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div')
-                ->pause(10000)
+                ->pause(4652)
+                ->type('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.q5bimw55.rpm2j7zs.k7i0oixp.gvuykj2m.j83agx80.cbu4d94t.ni8dbmo4.eg9m0zos.l9j0dhe7.du4w35lb.ofs802cu.pohlnb88.dkue75c7.mb9wzai9.l56l04vs.r57mb794.kh7kg01d.c3g1iek1.buofh1pr > div.j83agx80.cbu4d94t.buofh1pr > div.o6r2urh6.buofh1pr.datstx6m.l9j0dhe7.oh7imozk > div.rq0escxv.buofh1pr.df2bnetk.hv4rvrfc.dati1w0a.l9j0dhe7.k4urcfbm.du4w35lb.gbhij3x4 > div > div > div > div > div._5rpb > div', $baidang->noidung)
+                ->pause(4012)
+                //chua an hinh anh
+                ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div > div > div > div',storage_path('app/public/images/'.$hinhanh->tenhinh))
+                ->pause(10015)
                 ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.hv4rvrfc.dati1w0a.discj3wi.b5q2rw42.lq239pai.mysgfdmx.hddg9phg > div > div')
-                ->pause(5000)
-                ->assertSee('facebook');
+                ->pause(9475);
         });
     }
 
@@ -413,17 +440,21 @@ class ExampleTest extends DuskTestCase
 
     public function  testDangNhapNhatTao()
     {
-        $this-> browse(function(Browser $first){
+        //lấy dữ liệu bảng tạm
+        $dangnhapdd = luudangnhapdd::all()->first();
+        // lấy dữ liệu thằng đang đang nhập
+        $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $this-> browse(function(Browser $first)use($tkddn){
             $first  ->visit('https://nhattao.com/')
                     ->pause(2002)
                     ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.headerBar-login.OverlayTrigger')
                     ->pause(2501)
-                    ->type('#ctrl_pageLogin_login','0523931003')
+                    ->type('#ctrl_pageLogin_login',$tkddn->sodienthoai)
                     ->pause(2711)
-                    ->type('#ctrl_pageLogin_password','123456')
+                    ->type('#ctrl_pageLogin_password',$tkddn->matkhau)
                     ->pause(3512)
                     ->press('.submitUnit > .button')
-                    ->pause(500005);
+                    ->pause(15471);
         });
     }
 
@@ -433,22 +464,23 @@ class ExampleTest extends DuskTestCase
 
     public function  testDangKyNhatTao()
     {
-        $this-> browse(function(Browser $first){
+        $tkdd = taikhoandd::all()->last();
+        $this-> browse(function(Browser $first)use($tkdd){
             $first  ->visit('https://nhattao.com/')
                     ->pause(2002)
                     ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.OverlayTrigger.headerBar-register')
                     ->pause(2501)
-                    ->type('form > div:nth-child(6) > .floatInput','0332077070')
+                    ->type('form > div:nth-child(6) > .floatInput',$tkdd->sodienthoai)
                     ->pause(2711)
-                    ->type('form > div:nth-child(7) > .fieldPassword','123456')
+                    ->type('form > div:nth-child(7) > .fieldPassword',$tkdd->matkhau)
                     ->pause(2731)
-                    ->type('form > div:nth-child(8) > .floatInput','123456')
+                    ->type('form > div:nth-child(8) > .floatInput',$tkdd->matkhau)
                     ->pause(2415)
-                    ->type('form > div.dobField > div:nth-child(1) > input[name="dob_day"]','23')
+                    ->type('form > div.dobField > div:nth-child(1) > input[name="dob_day"]',$tkdd->ngaysinh)
                     ->pause(2147)
-                    ->select('form > div.dobField > div.dobMonth > select[name="dob_month"]','5')
+                    ->select('form > div.dobField > div.dobMonth > select[name="dob_month"]',$tkdd->thangsinh)
                     ->pause(2715)
-                    ->select('form > div.dobField > div.dobYear > select[name="dob_year"]','1998')
+                    ->select('form > div.dobField > div.dobYear > select[name="dob_year"]',$tkdd->namsinh)
                     ->pause(3512)
                     ->select('form > .fieldGender','female')
                     ->pause(2451)
@@ -463,39 +495,46 @@ class ExampleTest extends DuskTestCase
      */
     public function  testDangBaiNhatTao()
         {
-            $this-> browse(function(Browser $first){
+
+            $dangnhapdd = luudangnhapdd::all()->first();
+            $tkddn = taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+            $baidang = baiviet::where('id_bv',$dangnhapdd->id_baidang)->first();
+            $id_hinh = $baidang->id_ha;
+            $hinhanh = hinhanh::where('id_ha',$id_hinh)->first();
+            $this-> browse(function(Browser $first)use($tkddn,$baidang,$hinhanh){
                 $first  ->visit('https://nhattao.com/')
                         ->pause(2002)
                         ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.headerBar-login.OverlayTrigger')
                         ->pause(2501)
-                        ->type('#ctrl_pageLogin_login','0523931003')
+                        ->type('#ctrl_pageLogin_login',$tkddn->sodienthoai)
                         ->pause(2711)
-                        ->type('#ctrl_pageLogin_password','123456')
+                        ->type('#ctrl_pageLogin_password',$tkddn->matkhau)
                         ->pause(3512)
                         ->press('.submitUnit > .button')
                         ->pause(2345)
                         ->click('#header > div.pageWidth > div > div > div.headerBar-right > a')
                         ->pause(2151)
-                        ->type('#ctrl_title_thread_create','Test dịch vụ du lịch')
+                        ->type('#ctrl_title_thread_create',$baidang->tieude)
                         ->pause(2012)
-                        ->attach('#ctrl_xfServerUniqueId2',storage_path('app/public/images/g5.jpg'))
+                        ->attach('#ctrl_xfServerUniqueId2',storage_path('app/public/images/'.$hinhanh->tenhinh))
                         ->pause(2312)
-                        ->type('#ctrl_GlobalCreator_classified_price','1500000')
+                        ->type('#ctrl_GlobalCreator_classified_price',$baidang->giaban)
+                        ->pause(2154)
                         ->check('#ctrl_classified_message_html_enabled')
                         ->pause(2113)
-                        ->type('#ctrl_description_hider > textarea','Test bán tua du lịch')
+                        ->type('#ctrl_description_hider > textarea',$baidang->noidung)
                         ->pause(5523)
                         ->press('.NhattaoMods_FormStep1 > .button')
                         ->pause(3212)
                         //do website không có danh mục dịch vụ du lịch nên cho chọn 1 danh mục khác
                         ->select('.GlobalCreator_ThreadFormStep > .GlobalCreator_ThreadFormNodeAuto > li > .NhattaoMods_TextField','675')
-                        ->pause(2141)
+                        ->pause(7141)
                         ->select('node_id')
-                        ->pause(2541)
+                        ->pause(6541)
                         ->radio('#ctrl_classified_status1','1')
-                        ->pause(2542)
+                        ->pause(10459)
                         ->press('Đăng bán')
-                        ->pause(500002);
+                        ->pause(35015);
             });
         }
 

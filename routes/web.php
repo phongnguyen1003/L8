@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\DBQuangCao;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,29 +60,3 @@ Route::get('/dangbai','App\Http\Controllers\BaiVietController@dangbai');
 Route::get('/dangbaidd/{id_bv}','App\Http\Controllers\BaiVietController@dangbaidd');
 
 
-// Route::get('/xulydiendan','App\Http\Controllers\DienDanController@xulydiendan');
-
-
-//sao không thấy màn hình của Firefox, tuy rằng có hiện ra kết quả chạy
-// Route::get('/run_cmd', function () {
-//     //cách gọi 1 command line 1a: trực tiếp,
-//    $process = new Process(['php','artisan','dusk']
-//                        ,'C:\xampp\htdocs\Laravel_8.0.3\L8');             //folder để chạy 1 process
-
-//    //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
-// //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
-
-//     //$process->setPTY(true); 			//chưa kiểm tra
-//    $process->run();
-
-//     //bắt lỗi, hiện error
-//     if (!$process->isSuccessful()) {
-//         throw new ProcessFailedException($process);
-//     }
-
-//     //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
-//     echo '<pre>'.$process->getOutput();
-
-// });//end Route::get('/',
-
-// Route::get('/run_cmd', 'App\Http\Controllers\HomeController@runcmd');//end Route::get('/',

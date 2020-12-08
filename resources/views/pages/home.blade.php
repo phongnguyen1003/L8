@@ -35,11 +35,11 @@
                 </a>
             </div><div class="col-4 home__logo--items">
                 <a href="">
-                    <img alt="" src="{{ asset('backend/images/unnamed (1).jpg') }}">
+                    <img alt="" src="{{ asset('backend/images/24hquangcao.PNG') }}">
                 </a>
             </div><div class="col-4 home__logo--items">
                 <a href="">
-                    <img alt="" src="{{ asset('backend/images/YouTube-Face-Blur-Tool.jpg') }}">
+                    <img alt="" src="{{ asset('backend/images/nhattao.png') }}">
                 </a>
             </div>
 

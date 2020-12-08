@@ -44,6 +44,14 @@ class HomeController extends Controller
             $process = new Process(['php','artisan','dusk','--group=dangnhapfb']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
+        if($tkdd->tendiendan=="Nhật Tảo"){
+            $process = new Process(['php','artisan','dusk','--group=dangnhapnhattao']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Mua Rẻ"){
+            $process = new Process(['php','artisan','dusk','--group=dangnhapmr']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
                  //folder để chạy 1 process
        //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
      //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
@@ -138,6 +146,14 @@ class HomeController extends Controller
             $process = new Process(['php','artisan','dusk','--group=dangkyfb']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
+        if($tkdd->tendiendan=="Nhật Tảo"){
+            $process = new Process(['php','artisan','dusk','--group=dangkynhattao']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Mua Rẻ"){
+            $process = new Process(['php','artisan','dusk','--group=dangkymr']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
                  //folder để chạy 1 process
        //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
      //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
@@ -162,9 +178,9 @@ class HomeController extends Controller
         $this->validate($request,
             [
                 'hoten'=>'required',
-                'email'=>'required|email|unique:taikhoandd,email',
+                'email'=>'required|email',
                 'tendangnhap'=>'required',
-                'sodienthoai'=>'required|unique:taikhoandd,sodienthoai',
+                'sodienthoai'=>'required',
                 'password'=>'required',
                 'password_confirm'=>'required|same:password',
                // 'diachi'=>'required',
@@ -176,11 +192,9 @@ class HomeController extends Controller
                 'email.required'=>'Vui lòng nhập email!',
                 'tendangnhap.required'=>'Vui lòng nhập tên đăng nhập!',
                 'email.email'=>'Không đúng định dạng email!',
-                'email.unique'=>'Email đã có người sử dụng!',
                 'password.required'=>'Vui lòng nhập mật khẩu!',
                 'password_confirm.same'=>'Mật khẩu không khớp!',
                 'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
-                'sodienthoai.unique'=>'Số điện thoại đã có người sử dụng!',
                // 'diachi.required'=>'Vui lòng nhập địa chỉ!',
                // 'phuong.required'=>'Vui lòng nhập phường/xã!',
                // 'quan.required'=>'Vui lòng nhập quận/huyện!',

@@ -51,6 +51,14 @@ class BaiVietController extends Controller
             $process = new Process(['php','artisan','dusk','--group=dangbaifb']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
+        if($tkdd->tendiendan=="Nhật Tảo"){
+            $process = new Process(['php','artisan','dusk','--group=dangbainhattao']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Mua Rẻ"){
+            $process = new Process(['php','artisan','dusk','--group=dangbaimr']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
        $process->run();
 
         //bắt lỗi, hiện error

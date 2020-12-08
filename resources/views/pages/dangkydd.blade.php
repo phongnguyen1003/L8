@@ -46,6 +46,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <option value="Chợ Tốt">Chợ Tốt</option>
             <option value="Facebook">Facebook</option>
             <option value="24h Quảng Cáo">24h Quảng Cáo</option>
+            <option value="Nhật Tảo">Nhật Tảo</option>
+            <option value="Mua Rẻ">Mua Rẻ</option>
         </select>
             <div class="clearfix"></div>
             <input type="submit" value="Đăng ký" name="dangky">

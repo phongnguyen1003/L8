@@ -61,16 +61,15 @@ class BaiVietController extends Controller
         }
 
         $process->setTimeout(3600);
-       $process->run();
-
+        $process->run();
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+        return false;
         }
-
-        //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+        $process->stop();
+        // hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
         echo '<pre>'.$process->getOutput();
-
+        return true;
     }
 
 
@@ -99,8 +98,12 @@ class BaiVietController extends Controller
         DB::table('luudangnhapdd')
             ->where('id', 1)
             ->update(['id_baidang' =>  $id_bv]);
-        $this->dangbaidd_auto();
-        return redirect('/dangbai')-> with('dangbai','Đăng bài thành công');
+         $kiemtradangbai = $this->dangbaidd_auto();
+        if ($kiemtradangbai) {
+            return redirect('/dangbai')-> with('dangbai','Đăng bài thành công');
+        }else{
+        return redirect('/dangbai')-> with('dangbai','Đăng bài thất bại');
+        }
 
     }
 

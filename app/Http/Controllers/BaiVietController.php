@@ -59,6 +59,8 @@ class BaiVietController extends Controller
             $process = new Process(['php','artisan','dusk','--group=dangbaimr']
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
+
+        $process->setTimeout(3600);
        $process->run();
 
         //bắt lỗi, hiện error
@@ -185,5 +187,14 @@ class BaiVietController extends Controller
         DB::table('baiviet')->where('id_bv',$id_bv)->delete();
         Session::put('message','Xóa bài viết thành công');
         return Redirect::to('qlbaiviet');
+    }
+
+    public function search(Request $request){
+        $keywords = $request->keywords_submit;
+        $search_bv = DB::table('baiviet')->orWhere('noidung','like','%'.$keywords.'%')
+        ->orWhere('tenbaiviet','like','%'.$keywords.'%')
+        ->orWhere('tieude','like','%'.$keywords.'%')->get();
+        return view('pages.search')->with('search_bv',$search_bv);
+
     }
 }

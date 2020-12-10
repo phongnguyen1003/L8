@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
+    {{-- <script type="application/x-javascript">
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -15,7 +15,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             window.scrollTo(0, 1);
         }
 
-    </script>
+    </script> --}}
     <!-- bootstrap-css -->
 
     <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
@@ -63,12 +63,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="top-nav clearfix">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
+                {{-- <form action="{{URL::to('timkiem')}}" method="POST">
+                    {{csrf_field()}}
                     <li>
-                        <input type="text" class="form-control search" placeholder=" Search">
+                        <input type="text" name="keywords_submit" class="form-control search" placeholder="Tìm kiếm diễn đàn">
                     </li>
+                </form> --}}
                     <!-- user login dropdown start-->
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
                                 style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
@@ -96,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </li>
 
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
                                 style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">

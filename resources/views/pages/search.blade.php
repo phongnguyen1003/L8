@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Đăng bài
+    <title>Tìm kiếm
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,15 +31,8 @@
 
                                 <input style="background: #c9302c; border: none;  box-shadow: none;" type="text" name="keywords_submit" class="form-control" placeholder="Tìm kiếm bài viết">
 
-                        </form>
-                        <?php
-                        $dangbai = Session::get('dangbai');
-                        if($dangbai){
-                            echo '<span class="text-alert">'.$dangbai.'</span>';
-                            Session::put('dangbai',null);
-                        }
+                            </form>
 
-                        ?>
                         <div>
                             <table class="table" ui-jq="footable" ui-options='{
             "paging": {
@@ -62,29 +55,17 @@
                                         </tr>
                                     </thead>
                                 <tbody style="text-align: center">
-                                    @foreach ($all_baiviet as $key => $baiviet)
+                                    @foreach ($search_bv as $key => $search)
 
                                     <tr data-expanded="true">
-                                        <td>{{$baiviet->id_bv}}</td>
-                                        <td>{{$baiviet->tenbaiviet}}</td>
-                                        <td>{{$baiviet->tieude}}</td>
-                                        <td style="text-align: justify">{{$baiviet->noidung}}</td>
+                                        <td>{{$search->id_bv}}</td>
+                                        <td>{{$search->tenbaiviet}}</td>
+                                        <td>{{$search->tieude}}</td>
+                                        <td style="text-align: justify">{{$search->noidung}}</td>
                                         <td> {{Session::get('diendan')}} </td>
-
-                                         {{-- <td>
-                                            <select style="margin-left: 5px" class="form-control" name="diendan">
-                                                <option value="Chợ Tốt">Chợ Tốt</option>
-                                                <option value="Facebook">Facebook</option>
-                                                <option value="24h Quảng Cáo">24h Quảng Cáo</option>
-
-                                                @foreach ($abc as $key => $dd)
-                                                  <option name="id_dd" value="{{$dd->id_dd}}">{{$dd->tendiendan}}</option>
-                                                @endforeach
-                                            </select>
-                                        </td> --}}
                                         <td>
                                             <button class="btn btn-danger" style="margin-left: 15px">
-                                                <a class="text-white" href="{{URL::to('/dangbaidd/'.$baiviet->id_bv)}}">
+                                                <a class="text-white" href="{{URL::to('/dangbaidd/'.$search->id_bv)}}">
                                                     Đăng Bài
                                                 </a>
                                             </button>

@@ -583,8 +583,12 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     color: #fff;
     border-radius: 100px;
     -webkit-border-radius: 100px;
-	cursor:pointer;
+    cursor:pointer;
+    margin-top: 3px;
+
+
 }
+
 .search:focus {
     width:180px;
     border:1px solid #8b5c7e;
@@ -594,7 +598,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     -ms-transition:all .3s ease;
     -o-transition:all .3s ease;
     transition:all .3s ease;
-    color:#c8c8c8;
+    color:black;
     font-weight: 300;
 }
 .todo-search:focus{
@@ -3165,5 +3169,6 @@ span.text-alert{
 #container > header > div.top-nav.clearfix > ul > li.dropdown > a > b{
     border: none;
 }
+
 
 

@@ -57,7 +57,8 @@ class HomeController extends Controller
      //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
 
         //$process->setPTY(true); 			//chưa kiểm tra
-       $process->run();
+        $process->setTimeout(3600);
+        $process->run();
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
@@ -159,10 +160,14 @@ class HomeController extends Controller
      //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
 
         //$process->setPTY(true); 			//chưa kiểm tra
-       $process->run();
+        $process->setTimeout(3600);
+        $process->run();
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
+            // $processFailedException = new ProcessFailedException($process);
+            //  $this->logger->error($processFailedException->getMessage());
+            //  throw $processFailedException;
             throw new ProcessFailedException($process);
         }
 
@@ -201,7 +206,7 @@ class HomeController extends Controller
                // 'tinh.required'=>'Vui lòng nhập tỉnh/thành phố!',
 
             ]);
-            //bắt lỗi trùng email sdt
+            //bắt lỗi trùng email, sdt, tendangnhap trên cùng 1 dd
             $users = DB::table('taikhoandd')
             ->where('tendiendan', $request->diendan)
             ->where(function ($query)use($request) {
@@ -210,8 +215,9 @@ class HomeController extends Controller
                ->orWhere('tendangnhap',$request ->tendangnhap);
             })->first();
             if ($users) {
-                return redirect()->back() -> with('thanhcong','Email,sdt hoặc tài khoản trùng với tk cũ');
+                return redirect()->back() -> with('thanhcong','Email,sdt hoặc tài khoản đã được sử dụng!');
             }
+
             $id=session::get('id_nd');
 
             $tk = new taikhoandd();
@@ -384,5 +390,6 @@ class HomeController extends Controller
     public function page404(){
         return view('page404');
     }
+
 
 }

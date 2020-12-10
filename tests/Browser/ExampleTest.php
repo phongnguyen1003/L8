@@ -122,24 +122,23 @@ class ExampleTest extends DuskTestCase
                     ->pause(7124)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a')
                     ->pause(5991)
-                    //k ăn chỗ giá bán
                     ->type('price',$baidang->giaban)
-                    ->pause(2992)
+                    ->pause(4992)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
-                   ->pause(1999)
+                   ->pause(2105)
                    ->type('#subject',$baidang->tieude)
-                   ->pause(1999)
+                   ->pause(2048)
                    ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
-                   ->pause(999)
+                   ->pause(3541)
                    ->type('body',$baidang->noidung)
-                   ->pause(1999)
+                   ->pause(3125)
                    ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a.btn.btn-lg.btn-default.btn-default-customized')
-                   ->pause(1999)
+                   ->pause(2213)
                    ->clickLink('Không giao hàng')
-                   ->pause(1999)
+                   ->pause(2513)
                    ->press('ĐĂNG NGAY')
-                   ->pause(2999)
-                   ->assertSee('Chợ Tốt');
+                   ->pause(35420);
+                //    ->assertSee('Chợ Tốt');
         });
     }
 

@@ -13,8 +13,8 @@ class DBQuangCao extends Controller
         Schema::create('NguoiDung', function ($table) {
             $table->increments('id_nd');
             $table->string('hoten_nd', 50);
-            $table->string('email_nd', 50);
-            $table->string('sdt_nd', 10);
+            $table->string('email_nd', 50)->unique();
+            $table->string('sdt_nd', 10)->unique();
             $table->text('matkhau_nd');
            // $table->string('matkhau_nd', 50);
             $table->timestamps();
@@ -31,8 +31,8 @@ class DBQuangCao extends Controller
             $table->increments('id_tk');
             $table->string('hoten', 50);
             $table->string('tendangnhap', 50);
-            $table->string('email', 50)->unique();
-            $table->string('sodienthoai', 10)->unique();
+            $table->string('email', 50);
+            $table->string('sodienthoai', 10);
             $table->text('matkhau');
             $table->string('ngaysinh', 10);
             $table->string('thangsinh', 10);

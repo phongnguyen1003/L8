@@ -156,23 +156,18 @@ class HomeController extends Controller
             ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
         }
                  //folder để chạy 1 process
-       //cách gọi 1 command line 1b: dùng file .bat  //nội dung file "run-dusk.bat" là: php artisan dusk
-     //    $process = new Process(['run-dusk.bat'],'C:\xampp\htdocs\Laravel_8.0.3\L8');
-
-        //$process->setPTY(true); 			//chưa kiểm tra
         $process->setTimeout(3600);
         $process->run();
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-            // $processFailedException = new ProcessFailedException($process);
-            //  $this->logger->error($processFailedException->getMessage());
-            //  throw $processFailedException;
-            throw new ProcessFailedException($process);
-        }
 
-        //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+           return false;
+
+        }
+        $process->stop();
         echo '<pre>'.$process->getOutput();
+        return true;
 
     }
 
@@ -238,8 +233,15 @@ class HomeController extends Controller
             $tk->id_nd = $id;
             $tk->save();
 
-            $this->dangkydd_auto();
-            return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');
+            $kiemtradangky=$this->dangkydd_auto();
+            if ($kiemtradangky) {
+               // $tk->save();
+                return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');
+            }else{
+                // taikhoandd::all()->last()->delete();
+                return redirect()->back() -> with('thanhcong','Tạo tài khoản thất bại');
+            }
+            // return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');
 
         }
 
@@ -341,6 +343,7 @@ class HomeController extends Controller
     public function dangxuat(){
         Session::put('hoten_nd',null);
         Session::put('id_nd',null);
+        Session::forget(['id_tk','sodt','diendan']);
         return Redirect::to('/dangnhap');
     }
 

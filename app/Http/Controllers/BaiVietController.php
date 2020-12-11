@@ -62,12 +62,15 @@ class BaiVietController extends Controller
 
         $process->setTimeout(3600);
         $process->run();
+
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-        return false;
+            return false;
+           // throw new ProcessFailedException($process);
         }
         $process->stop();
-        // hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+
+        //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
         echo '<pre>'.$process->getOutput();
         return true;
     }

@@ -76,7 +76,7 @@ class HomeController extends Controller
         $this->validate($request,
         [
             'email'=>'required|email',
-            'sodienthoai'=>'required',
+            'sodienthoai'=>'required|min:10|max:10',
             'password'=>'required|min:6',
 
         ],
@@ -86,6 +86,8 @@ class HomeController extends Controller
             'password.required'=>'Vui lòng nhập mật khẩu!',
             'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự!',
             'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
+            'sodienthoai.min'=>'Số điện thoại chỉ có 10 số!',
+            'sodienthoai.max'=>'Số điện thoại chỉ có 10 số!',
 
         ]);
 
@@ -180,8 +182,8 @@ class HomeController extends Controller
                 'hoten'=>'required',
                 'email'=>'required|email',
                 'tendangnhap'=>'required',
-                'sodienthoai'=>'required',
-                'password'=>'required',
+                'sodienthoai'=>'required|min:10|max:10',
+                'password'=>'required|min:6',
                 'password_confirm'=>'required|same:password',
                // 'diachi'=>'required',
                // 'phuong'=>'required',
@@ -193,8 +195,11 @@ class HomeController extends Controller
                 'tendangnhap.required'=>'Vui lòng nhập tên đăng nhập!',
                 'email.email'=>'Không đúng định dạng email!',
                 'password.required'=>'Vui lòng nhập mật khẩu!',
+                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự!',
                 'password_confirm.same'=>'Mật khẩu không khớp!',
                 'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
+                'sodienthoai.min'=>'Số điện thoại chỉ có 10 số!',
+                'sodienthoai.max'=>'Số điện thoại chỉ có 10 số!',
                // 'diachi.required'=>'Vui lòng nhập địa chỉ!',
                // 'phuong.required'=>'Vui lòng nhập phường/xã!',
                // 'quan.required'=>'Vui lòng nhập quận/huyện!',
@@ -229,6 +234,7 @@ class HomeController extends Controller
            // $tk->quan = $request->quan;
            // $tk->tinh = $request->tinh;
             $tk->tendiendan = $request->diendan;
+            $tk->gioitinh = $request->gioitinh;
             // $tk->id_dd = $request->diendan;
             $tk->id_nd = $id;
             $tk->save();
@@ -261,6 +267,8 @@ class HomeController extends Controller
     }
 
     public function xulydangnhap(Request $request){
+            Session::forget(['id_tk','sodt','diendan']);
+
             $email = $request->email;
             $pass = $request->password;
 
@@ -296,7 +304,7 @@ class HomeController extends Controller
             'Name'=>'required',
             'Email'=>'required|email|unique:nguoidung,email_nd',
             'Phone'=>'required|unique:nguoidung,sdt_nd',
-            'Password'=>'required',
+            'Password'=>'required|min:6',
             'Password_confirm'=>'required|same:Password'
         ],
         [
@@ -304,6 +312,7 @@ class HomeController extends Controller
             'Email.email'=>'Không đúng định dạng email!',
             'Email.unique'=>'Email đã có người sử dụng!',
             'Password.required'=>'Vui lòng nhập mật khẩu!',
+            'Password.min'=>'Mật khẩu phải có ít nhất 6 ký tự!',
             'Password_confirm.same'=>'Mật khẩu không khớp!',
             'Phone.required'=>'Vui lòng nhập số điện thoại!',
             'Phone.unique'=>'Số điện thoại đã có người sử dụng!'
@@ -381,7 +390,7 @@ class HomeController extends Controller
     //DANH SÁCH TÀI KHOẢN CỦA DIỄN ĐÀN
 
     public function dstaikhoandd(){
-        $all_taikhoandd = DB::table('taikhoandd')->get();
+        $all_taikhoandd = DB::table('taikhoandd')->where('id_nd',Session::get('id_nd'))->get();
         return view('pages.dstaikhoandd')->with('all_taikhoandd',$all_taikhoandd);
 
     }
@@ -392,7 +401,7 @@ class HomeController extends Controller
     }
 
     public function page404(){
-        return view('page404');
+        return view('errors.404');
     }
 
 

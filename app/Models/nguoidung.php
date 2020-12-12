@@ -15,4 +15,8 @@ class nguoidung extends Model
     {
         return $this->hasMany('taikhoandd');
     }
+    public function baiviet()
+    {
+        return $this->hasMany('baiviet');
+    }
 }

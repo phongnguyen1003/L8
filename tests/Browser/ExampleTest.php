@@ -50,8 +50,7 @@ class ExampleTest extends DuskTestCase
                     ->press('ĐĂNG KÝ')
                     ->pause(10000)
                     ->assertSee('VUI LÒNG XÁC NHẬN SỐ ĐIỆN THOẠI')
-                    // ->waitForText('VUI LÒNG XÁC NHẬN SỐ ĐIỆN THOẠI',10)
-                    ->pause(30000);
+                    ->pause(60000);
                     //nên thay lện pause cuối thành lệnh chờ do chỉ pause đc 60s
                     //để thời gian dài để nhập mã xác thực gửi về điện thoại bằng tay
                     // ->assertSee('Chợ Tốt');
@@ -112,20 +111,20 @@ class ExampleTest extends DuskTestCase
                     ->clickLink('Dịch vụ, Du lịch')
                     ->pause(2150)
                     ->clickLink('Dịch vụ')
-                    ->pause(2143)
+                    ->pause(5143)
                     ->clickLink('Cần bán')
-                    ->pause(2414)
+                    ->pause(5414)
                     ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div:nth-child(2) > div > select','13000')
-                    ->pause(2512)
+                    ->pause(5512)
                     ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(2) > div:nth-child(2) > div > select','13104')
-                    ->pause(2157)
+                    ->pause(5157)
                     ->select('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(3) > div:nth-child(2) > div > select','9254')
                     ->pause(2578)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div')
                     ->pause(1971)
                     ->radio('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.text-center._1A31TKpr3aul3X8swjEql4 > div:nth-child(1)','#company_ad|0')
                     ->pause(2909)
-                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/backend/images/'.$hinhanh->tenhinh))
+                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/images/'.$hinhanh->tenhinh))
                     ->pause(5124)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a')
                     ->pause(5991)
@@ -149,6 +148,35 @@ class ExampleTest extends DuskTestCase
         });
     }
 
+
+    /**
+     * @group capnhatchotot
+     */
+    public function  testCapNhatCT()
+    {
+
+        // //lấy dữ liệu bảng tạm
+        // $dangnhapdd = luudangnhapdd::all()->first();
+        // // lấy dữ liệu thằng đang đang nhập
+        // $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+
+        $this-> browse(function(Browser $first){
+            $first  ->visit('https://accounts.chotot.com/login?continue=https://www.chotot.com/')
+                    //->click('#__next > header > div.sc-hSdWYo.iwLlIE > div > div:nth-child(2) > div')
+                    ->pause(5000)
+                    ->type('#content > div > div > div > div > form > input:nth-child(1)','0395608800')
+                    ->pause(4123)
+                    ->type('#content > div > div > div > div > form > input:nth-child(2)','123456')
+                    ->pause(3214)
+                    ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
+                    ->pause(4000)
+                    ->press('ĐĂNG NHẬP')
+                    ->pause(2513)
+                    ->click('#__next > header > div.appWrapper-Layout-container > div.appWrapper-Layout-rightPanel > div:nth-child(4) > a')
+                    ->pause(300001);
+                    // thời gian chờ để chỉnh sửa là 5p
+        });
+    }
 
     //=================================================MUA RẺ=======================================
 
@@ -187,11 +215,10 @@ class ExampleTest extends DuskTestCase
          $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
         $this -> browse(function(Browser $first)use($tkddn){
             $first  -> visit('https://muare.vn/login')
-                   // -> click('#app > header > div.header.container > div > div.col-lg-3.col-sm-5.col-md-4.col-xs-12 > div.login > a')
                     -> pause(2978)
-                    -> radio('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1)','#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1) > input')
+                    ->radio('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(2)','#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(2) > input')
                     -> pause(2154)
-                    -> type('#name',$tkddn->tendangnhap)
+                    -> type('#name',$tkddn->sodienthoai)
                     -> pause(2874)
                     -> type('#password',$tkddn->matkhau)
                     -> check('remember')
@@ -205,14 +232,19 @@ class ExampleTest extends DuskTestCase
      * @group dangbaimr
      */
     public function testDangBaiMR(){
-        $this -> browse(function(Browser $first){
-            $first  -> visit('https://muare.vn/')
-                    -> pause(1999)
-                    -> click('#app > header > div.header.container > div > div.col-lg-3.col-sm-5.col-md-4.col-xs-12 > div.login > a')
-                    -> pause(2999)
-                    -> radio('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1)','#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(1) > input')
-                    -> type('#name','manhlinh23')
-                    -> type('#password','23051998')
+        $dangnhapdd = luudangnhapdd::all()->first();
+        $tkddn = taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $baidang = baiviet::where('id_bv',$dangnhapdd->id_baidang)->first();
+        $id_hinh = $baidang->id_ha;
+        $hinhanh = hinhanh::where('id_ha',$id_hinh)->first();
+        $this -> browse(function(Browser $first)use($tkddn,$baidang,$hinhanh){
+            $first  -> visit('https://muare.vn/login')
+                    -> pause(2978)
+                    ->radio('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(2)','#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(3) > label:nth-child(2) > input')
+                    -> pause(2154)
+                    -> type('#name',$tkddn->sodienthoai)
+                    -> pause(2874)
+                    -> type('#password',$tkddn->matkhau)
                     -> check('remember')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(7) > div > button')
                     -> pause(2999)
@@ -220,21 +252,19 @@ class ExampleTest extends DuskTestCase
                     -> pause(2999)
                     -> press('Đăng tin Sản phẩm')
                     -> pause(3999)
-                    -> type('#postTitle','Đăng test thôi nhé abc bkds mdk kbd jdbs dbsd dfsi kcsbk :v')
-                    -> type('postDescription','Đây là nội dung phần test đấy nha jkdsk dkfdsk ksbk ksbkfsb s b dbsfk')
-                    -> type('#price','1000000')
+                    -> type('#postTitle',$baidang->tieude)
+                    -> type('postDescription',$baidang->noidung)
+                    -> type('#price',$baidang->giaban)
                     -> select('#js-example-basic-multiple2')
-                    -> select('#location-post')
+                    -> select('#location-post','4')
                     -> pause(2999)
                     -> click('#app > section > div > div.row > div > div > div.panel.panel-default > div.panel-body > form > div:nth-child(4) > div > div.row-attr.row.storage-box > div > div > a.add-new')
                     -> pause(3900)
-                    -> type('title','test test test test test test')
-                    -> type('#popup_price','1000000')
-                    -> type('#des','Test thôi nên không có gì để mô tả cả đâu :v test test test test test test test test')
+                    -> type('title',$baidang->tieude)
+                    -> type('#popup_price',$baidang->giaban)
+                    -> type('#des',$baidang->noidung)
                     -> select('#js-example-basic-multiple')
-                    ->attach('#upload',storage_path('app/public/images/g5.jpg'))
-
-                    // -> click('#form-storage > div.attr-basic.row > div.box-image.row > div > a')
+                    ->attach('#upload',storage_path('app/public/images/'.$hinhanh->tenhinh))
                     -> pause(5000)
                     -> radio('#form-storage > div.attr-advance.row > div > div:nth-child(3) > div:nth-child(1)','#statusSale1')
                     -> radio('#form-storage > div.attr-advance.row > div > div:nth-child(5) > div:nth-child(1)','#statusNew')
@@ -242,7 +272,9 @@ class ExampleTest extends DuskTestCase
                     -> pause(30000)
                     -> press('#saveItem')
                     -> pause(3999)
-                    -> type('#nameInfo','Phạm Băng Băng')
+                    -> type('#nameInfo',$tkddn->hoten)
+                    -> pause(3145)
+                    -> type('#phoneInfo',$tkddn->sodienthoai)
                     -> pause(5900);
         });
     }
@@ -284,9 +316,9 @@ class ExampleTest extends DuskTestCase
                     ->pause(2000)
                     ->click('#u_0_2')
                     ->pause(3000)
-                    ->type('lastname','Trâu')
+                    ->type('lastname',$tkdd->hoten)
                     ->pause(1512)
-                    ->type('firstname','Trâu')
+                    ->type('firstname',$tkdd->hoten)
                     ->pause(2541)
                     ->type('reg_email__',$tkdd->email)
                     ->pause(2145)
@@ -501,7 +533,7 @@ class ExampleTest extends DuskTestCase
                     ->pause(2715)
                     ->select('form > div.dobField > div.dobYear > select[name="dob_year"]',$tkdd->namsinh)
                     ->pause(3512)
-                    ->select('form > .fieldGender','female')
+                    ->select('form > .fieldGender',$tkdd->gioitinh)
                     ->pause(2451)
                     ->press('.submitUnit > .button')
                     ->pause(10000)
@@ -562,4 +594,31 @@ class ExampleTest extends DuskTestCase
             });
         }
 
+         /**
+         * @group capnhatnhattao
+         */
+        public function  testCapNhatNhatTao()
+    {
+        //lấy dữ liệu bảng tạm
+        $dangnhapdd = luudangnhapdd::all()->first();
+        // lấy dữ liệu thằng đang đang nhập
+        $tkddn =taikhoandd::where('id_tk',$dangnhapdd->id_tk)->first();
+        $this-> browse(function(Browser $first) use($tkddn){
+            $first  ->visit('https://nhattao.com/')
+                    ->pause(2002)
+                    ->click('#header > div.pageWidth > div > div > div.headerBar-right > a.headerBar-login.OverlayTrigger')
+                    ->pause(2501)
+                    ->type('#ctrl_pageLogin_login',$tkddn->sodienthoai)
+                    ->pause(2711)
+                    ->type('#ctrl_pageLogin_password',$tkddn->matkhau)
+                    ->pause(3512)
+                    ->press('.submitUnit > .button')
+                    ->pause(3541)
+                    ->mouseover('#header > div.pageWidth > div > div > div.headerBar-right > div.visitor.Popup > a')
+                    ->pause(3110)
+                    ->click('#XenForoUniq1 > ul > li:nth-child(1) > a')
+                    //để đợi 5p để chỉnh sửa và cập nhật bằng tay
+                    ->pause(300000);
+        });
+    }
 }

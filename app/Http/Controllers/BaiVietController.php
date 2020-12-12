@@ -67,7 +67,7 @@ class BaiVietController extends Controller
         if (!$process->isSuccessful()) {
             $process->stop();
             return false;
-           // throw new ProcessFailedException($process);
+          //  throw new ProcessFailedException($process);
         }
         $process->stop();
 
@@ -89,7 +89,7 @@ class BaiVietController extends Controller
     //     }
 
         if(Session::has('id_tk')){
-            $all_baiviet = DB::table('baiviet')->get();
+            $all_baiviet = DB::table('baiviet')->where('id_nd',session('id_nd'))->get();
             return view('pages.dangbai')->with('all_baiviet',$all_baiviet);
         }
         else{
@@ -156,7 +156,7 @@ class BaiVietController extends Controller
         $data['tieude']= $request->tieude;
         $data['noidung']= $request->noidung;
         $data['giaban']= $request->giaban;
-        // $data['id_tk']= Session::get('id_tk');
+        $data['id_nd']= Session::get('id_nd');
         $data['id_dm']= $dm->id_dm;
         $data['id_lt']= $lt->id_lt;
         $data['id_qm']= $qm->id_qm;

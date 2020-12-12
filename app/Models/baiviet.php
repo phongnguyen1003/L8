@@ -50,4 +50,9 @@ class baiviet extends Model
         return $this->hasMany('hinhanh');
     }
 
+    public function nguoidung()
+    {
+    	return $this->belongsTo('nguoidung');
+    }
+
 }

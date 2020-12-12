@@ -238,7 +238,8 @@ class HomeController extends Controller
                // $tk->save();
                 return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');
             }else{
-                // taikhoandd::all()->last()->delete();
+                $tkddlast = taikhoandd::all()->last();
+                DB::table('taikhoandd')->where('id_tk',$tkddlast->id_tk)->delete();
                 return redirect()->back() -> with('thanhcong','Tạo tài khoản thất bại');
             }
             // return redirect()->back() -> with('thanhcong','Tạo tài khoản thành công');

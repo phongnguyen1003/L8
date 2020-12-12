@@ -65,6 +65,7 @@ class BaiVietController extends Controller
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
+            $process->stop();
             return false;
            // throw new ProcessFailedException($process);
         }

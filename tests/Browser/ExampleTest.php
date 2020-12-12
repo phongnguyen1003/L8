@@ -48,7 +48,10 @@ class ExampleTest extends DuskTestCase
                     ->type('#content > div > div > div > div > form > input:nth-child(2)',$tkdd->matkhau)
                     ->pause(1245)
                     ->press('ĐĂNG KÝ')
-                    ->pause(59981);
+                    ->pause(10000)
+                    ->assertSee('VUI LÒNG XÁC NHẬN SỐ ĐIỆN THOẠI')
+                    // ->waitForText('VUI LÒNG XÁC NHẬN SỐ ĐIỆN THOẠI',10)
+                    ->pause(30000);
                     //nên thay lện pause cuối thành lệnh chờ do chỉ pause đc 60s
                     //để thời gian dài để nhập mã xác thực gửi về điện thoại bằng tay
                     // ->assertSee('Chợ Tốt');
@@ -122,7 +125,7 @@ class ExampleTest extends DuskTestCase
                     ->pause(1971)
                     ->radio('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.text-center._1A31TKpr3aul3X8swjEql4 > div:nth-child(1)','#company_ad|0')
                     ->pause(2909)
-                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/images/'.$hinhanh->tenhinh))
+                    ->attach('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div.col-xs-12._1leuGpQP7fsY3XCp-3eNDZ > input',storage_path('app/public/backend/images/'.$hinhanh->tenhinh))
                     ->pause(5124)
                     ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a')
                     ->pause(5991)
@@ -501,7 +504,12 @@ class ExampleTest extends DuskTestCase
                     ->select('form > .fieldGender','female')
                     ->pause(2451)
                     ->press('.submitUnit > .button')
-                    ->pause(500005);
+                    ->pause(10000)
+                    ->assertSee('Xác thực số điện thoại')
+                    ->pause(10000)
+                    //thêm đoạn thông báo đăng kí thành công
+                    //assertSee('Xác thực số điện thoại')
+                    ->pause(60000);
                     //đợi và nhập mã xác thực
         });
     }

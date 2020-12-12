@@ -63,24 +63,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="top-nav clearfix">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
-                {{-- <form action="{{URL::to('timkiem')}}" method="POST">
+                    {{-- <form action="{{URL::to('timkiem')}}" method="POST">
                     {{csrf_field()}}
                     <li>
-                        <input type="text" name="keywords_submit" class="form-control search" placeholder="Tìm kiếm diễn đàn">
+                        <input type="text" name="keywords_submit" class="form-control search"
+                            placeholder="Tìm kiếm diễn đàn">
                     </li>
-                </form> --}}
+                    </form> --}}
                     <!-- user login dropdown start-->
+                    @if(Session::has('id_tk'))
                     <li class="dropdown">
                         <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
-                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
+                            style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
+
                                 <?php
                                     $dd = Session::get('diendan');
                                     if($dd){
                                         echo $dd;
                                     }
-
                                 ?>
                                 |
                                 <?php
@@ -88,8 +90,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     if($sdt){
                                         echo $sdt;
                                     }
-
                                 ?>
+
                             </span>
                             <b class="caret"></b>
                         </a>
@@ -97,11 +99,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="{{URL::to('/xulydangxuatdd')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                         </ul>
                     </li>
-
+                    @endif
                     <li class="dropdown">
                         <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
-                                style="width: 30px; height: 30px; border-radius: 50%"> --}}
+                            style="width: 30px; height: 30px; border-radius: 50%"> --}}
                             <span class="username">
                                 Hello,
                                 <?php
@@ -134,14 +136,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="leftside-navigation">
                     <ul class="sidebar-menu" id="nav-accordion">
                         <li>
-                            <a  href="{{ URL::to('/trangchu') }}">
+                            <a href="{{ URL::to('/trangchu') }}">
                                 <i class="fa fa-home"></i>
                                 <span>Home</span>
                             </a>
                         </li>
 
                         <li>
-                            <a  href="{{ URL::to('/dangnhapdd') }}">
+                            <a href="{{ URL::to('/dangnhapdd') }}">
                                 <i class="fa fa-check-square"></i>
                                 <span>Đăng nhập trên diễn đàn </span>
                             </a>
@@ -259,4 +261,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </body>
 
 </html>
-

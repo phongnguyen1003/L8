@@ -62,12 +62,13 @@ class HomeController extends Controller
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+            $process->stop();
+            return false;
         }
-
+        $process->stop();
         //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
         echo '<pre>'.$process->getOutput();
-
+        return true;
     }
 
     public function xulydangnhapdd(Request $request){
@@ -110,11 +111,13 @@ class HomeController extends Controller
             //luu id vào bảng tạm
             DB::table('luudangnhapdd')->updateOrInsert(['id'=>1],['id'=>1,'id_tk'=>$result->id_tk]);
 
-            $this->dangnhapdd_auto();
-            return redirect('/dangbai')->with('alert','Đăng nhập thành công!');
-
-            return Redirect::to('/dangnhapdd');
-            // return redirect()->action([HomeController::class, 'home']);
+            $kiemtradangnhap=$this->dangnhapdd_auto();
+            if ($kiemtradangnhap) {
+                return redirect('/dangbai')->with('thanhcong','Đăng nhập thành công!');
+            }else{
+                Session::forget(['id_tk','sodt','diendan']);
+                return redirect()->back() -> with('thanhcong','Đăng nhập thất bại!');
+            }
         }else {
             return redirect('/dangnhapdd')->with('alert','Sai tài khoản,email hoặc mật khẩu.Vui lòng đăng nhập lại!');
 
@@ -163,9 +166,8 @@ class HomeController extends Controller
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-
-           return false;
-
+            $process->stop();
+            return false;
         }
         $process->stop();
         echo '<pre>'.$process->getOutput();

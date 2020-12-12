@@ -79,6 +79,7 @@ class ExampleTest extends DuskTestCase
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->pause(4000)
                     ->press('ĐĂNG NHẬP')
+                    ->waitForText($tkddn->hoten,10000)
                     ->pause(20001)
                     ->assertSee('Chợ Tốt');
         });
@@ -198,7 +199,10 @@ class ExampleTest extends DuskTestCase
                     -> type('#password-confirm',$tkdd->matkhau)
                     -> check('#contact-confirm')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.register-form > div:nth-child(9) > div > button')
-                    -> pause(59847);
+                    -> pause(10000)
+                    ->assertSee('Xác nhận OTP')
+                    ->waitForText('Xin chào, '.$tkdd->tendangnhap.'!',10000)
+                    ->pause(15000);
                     // thiếu bước nhập mã OTP do chưa kịp nhập :v
 
         });
@@ -223,6 +227,8 @@ class ExampleTest extends DuskTestCase
                     -> type('#password',$tkddn->matkhau)
                     -> check('remember')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(7) > div > button')
+                    -> pause(10000)
+                    ->waitForText('Xin chào, '.$tkddn->tendangnhap.'!',10000)
                     -> pause(13784);
         });
     }
@@ -299,8 +305,9 @@ class ExampleTest extends DuskTestCase
                     ->type('pass',$tkddn->matkhau)
                     ->pause(2999)
                     ->press('login')
+                    ->pause(10000)
+                    ->assertDontSee("Đăng nhập")
                     ->pause(15142);
-
         });
     }
 
@@ -422,6 +429,8 @@ class ExampleTest extends DuskTestCase
                     ->type('#password',$tkddn->matkhau)
                     ->pause(1485)
                     ->press('#container > section.sec-login > div > div > div:nth-child(1) > div.main-login.main-center > form > div:nth-child(3) > div > div.col-sm-4.plr5.text-right > button')
+                    ->pause(10000)
+                    ->waitForText($tkddn->hoten,10000)
                     ->pause(15231);
 
         });
@@ -505,7 +514,9 @@ class ExampleTest extends DuskTestCase
                     ->type('#ctrl_pageLogin_password',$tkddn->matkhau)
                     ->pause(3512)
                     ->press('.submitUnit > .button')
-                    ->pause(15471);
+                    ->pause(10000)
+                    ->waitForText($tkddn->email,10000)
+                    ->pause(10000);
         });
     }
 

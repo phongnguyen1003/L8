@@ -274,7 +274,7 @@ class ExampleTest extends DuskTestCase
                     ->pause(2999)
                     ->press('login')
                     ->pause(10000)
-                    ->waitForText('Nhóm',10000)
+                    ->assertDontSee("Đăng nhập")
                     ->pause(15142);
         });
     }

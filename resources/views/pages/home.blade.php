@@ -13,6 +13,15 @@
     </head>
 
     <body>
+         <?php
+        $capnhatbv = Session::get('capnhatbaidang');
+        if($capnhatbv){
+            echo '<span class="text-alert alert">'.$capnhatbv.'</span>';
+            Session::put('capnhatbaidang',null);
+        }
+
+        ?>
+
             <div class="col-4 home__logo--items">
                 <a href="">
                     <img alt="" src="{{ asset('backend/images/Chotot-Logo-480x297.png') }}">
@@ -49,4 +58,5 @@
     </body>
 
     </html>
+
 @endsection

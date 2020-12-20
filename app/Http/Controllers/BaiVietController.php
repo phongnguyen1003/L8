@@ -31,7 +31,7 @@ class BaiVietController extends Controller
     }
 
     public function qlbaiviet(){
-        $all_baiviet = DB::table('baiviet')->get();
+        $all_baiviet = DB::table('baiviet')->where('id_nd',session('id_nd'))->get();
         return view('pages.qlbaiviet')->with('all_baiviet',$all_baiviet);
     }
 
@@ -204,4 +204,64 @@ class BaiVietController extends Controller
         return view('pages.search')->with('search_bv',$search_bv);
 
     }
+
+
+    public function capnhat_auto(){
+        //cách gọi 1 command line 1a: trực tiếp,
+        // lấy tài khoản đang đăng nhập
+        $tkdd = taikhoandd::where("id_tk",Session::get('id_tk'))->first();
+        if($tkdd->tendiendan=="Chợ Tốt"){
+            $process = new Process(['php','artisan','dusk','--group=capnhatchotot']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="24h Quảng Cáo"){
+            $process = new Process(['php','artisan','dusk','--group=capnhat24hqc']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Facebook"){
+            $process = new Process(['php','artisan','dusk','--group=capnhatfb']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Nhật Tảo"){
+            $process = new Process(['php','artisan','dusk','--group=capnhatnhattao']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+        if($tkdd->tendiendan=="Mua Rẻ"){
+            $process = new Process(['php','artisan','dusk','--group=capnhatmr']
+            ,'C:\xampp\htdocs\Laravel_8.0.3\L8');
+        }
+
+        $process->setTimeout(3600);
+        $process->run();
+
+        //bắt lỗi, hiện error
+        if (!$process->isSuccessful()) {
+            $process->stop();
+            return false;
+          //  throw new ProcessFailedException($process);
+        }
+        $process->stop();
+
+        //hiện output, html tag '<pre>' để hiện text "xuống hàng" đẹp //text thiếu 0D hoặc 0A
+        echo '<pre>'.$process->getOutput();
+        return true;
+    }
+    public function capnhatbaidang(){
+        $kiemtracapnhat = $this->capnhat_auto();
+         if ($kiemtracapnhat) {
+             return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thành công');
+         }else{
+         return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thất bại');
+         }
+    }
+    // public function capnhatbv(){
+    //     if(Session::has('id_tk')){
+    //         return view('pages.capnhatbv');
+    //     }
+    //     else{
+    //         return redirect('/dangnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
+    //     }
+
+    //     return view('pages.capnhatbv');
+    // }
 }

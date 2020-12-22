@@ -50,10 +50,10 @@ class ExampleTest extends DuskTestCase
                     ->press('ĐĂNG KÝ')
                     ->pause(15000)
                     ->assertSee('VUI LÒNG XÁC NHẬN SỐ ĐIỆN THOẠI')
-                    ->pause(180000);
+                    ->pause(120000);
                     //nên thay lện pause cuối thành lệnh chờ do chỉ pause đc 60s
                     //để thời gian dài để nhập mã xác thực gửi về điện thoại bằng tay
-                    // ->assertSee('Chợ Tốt');
+                    //->assertSee('Chợ Tốt');
         });
     }
 
@@ -79,6 +79,7 @@ class ExampleTest extends DuskTestCase
                     ->uncheck('#content > div > div > div > div > form > div:nth-child(3) > label')
                     ->pause(4000)
                     ->press('ĐĂNG NHẬP')
+                    // ->waitForText($tkddn->hoten,10000)
                     ->pause(20001)
                     ->assertSee('Chợ Tốt');
         });
@@ -139,8 +140,9 @@ class ExampleTest extends DuskTestCase
                    ->type('body',$baidang->noidung)
                    ->pause(3125)
                    ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div.footer.navbar-fixed-bottom.formFooter._29qtwZnBfU4ggKBsMxnCL0 > div > div > a.btn.btn-lg.btn-default.btn-default-customized')
-                   ->pause(2213)
+                   ->pause(4213)
                    ->clickLink('Không giao hàng')
+                   // ->click('#content > div > div > div > div.container.wXl5RTamVUQpIsQLT-GCD > form > div:nth-child(1) > div > div > div:nth-child(1) > a:nth-child(4)')
                    ->pause(2513)
                    ->press('ĐĂNG NGAY')
                    ->pause(20420)
@@ -175,7 +177,7 @@ class ExampleTest extends DuskTestCase
                     ->press('ĐĂNG NHẬP')
                     ->pause(2513)
                     ->click('#__next > header > div.appWrapper-Layout-container > div.appWrapper-Layout-rightPanel > div:nth-child(4) > a')
-                    ->pause(30001)
+                    ->pause(180001)
                     // thời gian chờ để chỉnh sửa là 5p
                     ->assertSee('Bán Nhanh Hơn');
         });
@@ -201,7 +203,11 @@ class ExampleTest extends DuskTestCase
                     -> type('#password-confirm',$tkdd->matkhau)
                     -> check('#contact-confirm')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.register-form > div:nth-child(9) > div > button')
-                    -> pause(59847);
+                    -> pause(59847)
+                   // -> pause(10000)
+                    ->assertSee('Xác nhận OTP')
+                    ->waitForText('Xin chào, '.$tkdd->tendangnhap.'!',10000)
+                    ->pause(15000);
                     // thiếu bước nhập mã OTP do chưa kịp nhập :v
 
         });
@@ -226,6 +232,8 @@ class ExampleTest extends DuskTestCase
                     -> type('#password',$tkddn->matkhau)
                     -> check('remember')
                     -> press('#loginpageModal > div > div > div.modal-body.col-xs-12 > div.form-action > form.form-horizontal.login-form > div:nth-child(7) > div > button')
+                   // -> pause(10000)
+                   // -> waitForText('Xin chào, '.$tkddn->tendangnhap.'!',10000)
                     -> pause(13784);
         });
     }
@@ -302,6 +310,8 @@ class ExampleTest extends DuskTestCase
                     ->type('pass',$tkddn->matkhau)
                     ->pause(2999)
                     ->press('login')
+                   // ->pause(10000)
+                   // ->assertDontSee("Đăng nhập")
                     ->pause(15142);
 
         });
@@ -367,7 +377,6 @@ class ExampleTest extends DuskTestCase
                 ->pause(2552)
                 ->type('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.q5bimw55.rpm2j7zs.k7i0oixp.gvuykj2m.j83agx80.cbu4d94t.ni8dbmo4.eg9m0zos.l9j0dhe7.du4w35lb.ofs802cu.pohlnb88.dkue75c7.mb9wzai9.l56l04vs.r57mb794.kh7kg01d.c3g1iek1.buofh1pr > div.j83agx80.cbu4d94t.buofh1pr > div.o6r2urh6.buofh1pr.datstx6m.l9j0dhe7.oh7imozk > div.rq0escxv.buofh1pr.df2bnetk.hv4rvrfc.dati1w0a.l9j0dhe7.k4urcfbm.du4w35lb.gbhij3x4 > div > div > div > div > div._5rpb > div',$baidang->noidung)
                 ->pause(5012)
-               // ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > span > div > div > div > div',storage_path('app/public/images/dalat.jpg'))
                 ->attach('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.scb9dxdr.sj5x9vvc.dflh9lhu.cxgpxx05.dhix69tm.wkznzc2l.i1fnvgqd.j83agx80.rq0escxv.ibutc8p7.l82x9zwi.uo3d90p7.pw54ja7n.ue3kfks5.tr4kgdav.eip75gnj.ccnbzhu1.dwg5866k.cwj9ozl2.bp9cbjyn > div.j83agx80 > div:nth-child(1) > input',storage_path('app/public/images/'.$hinhanh->tenhinh))
                 ->pause(5015)
                 ->click('#mount_0_0 > div > div:nth-child(1) > div.rq0escxv.l9j0dhe7.du4w35lb > div:nth-child(7) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.iqfcb0g7.tojvnm2t.a6sixzi8.k5wvi7nf.q3lfd5jv.pk4s997a.bipmatt0.cebpdrjk.qowsmv63.owwhemhu.dp1hu0rb.dhp61c6y.l9j0dhe7.iyyx5f41.a8s20v7p > div > div > div > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > form > div > div.kr520xx4.pedkr2u6.ms05siws.pnx7fd3z.b7h9ocf4.pmk7jnqg.j9ispegn > div > div > div.j83agx80.cbu4d94t.f0kvp8a6.mfofr4af.l9j0dhe7.oh7imozk > div.ihqw7lf3.discj3wi.l9j0dhe7 > div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.pfnyh3mw.i1fnvgqd.gs1a9yip.owycx6da.btwxx1t3.hv4rvrfc.dati1w0a.discj3wi.b5q2rw42.lq239pai.mysgfdmx.hddg9phg > div > div')
@@ -425,7 +434,7 @@ class ExampleTest extends DuskTestCase
                     ->type('#reg_form > div:nth-child(9) > div > div > input',$tkdd->matkhau)
                     ->pause(1910)
                     ->type('#confirm',$tkdd->matkhau)
-                    ->pause(299154);
+                    ->pause(180154);
                     //câu hỏi xác thực và check capcha
                     // ->press('#reg_form > div:nth-child(13) > div > div.pull-right.plr5.text-right > button')
                     // ->pause(2999);
@@ -450,6 +459,8 @@ class ExampleTest extends DuskTestCase
                     ->type('#password',$tkddn->matkhau)
                     ->pause(1485)
                     ->press('#container > section.sec-login > div > div > div:nth-child(1) > div.main-login.main-center > form > div:nth-child(3) > div > div.col-sm-4.plr5.text-right > button')
+                    //->pause(10000)
+                    //->waitForText($tkddn->hoten,10000)
                     ->pause(15231);
 
         });
@@ -503,7 +514,7 @@ class ExampleTest extends DuskTestCase
                     ->type('#new_editor_fix',$baidang->noidung)
                     ->pause(2147)
                     ->check('#myCheck')
-                    ->pause(312457);
+                    ->pause(180457);
                     //check capcha bằng tay
                     // ->press('#submitBtn')
                     // ->pause(4999);
@@ -534,7 +545,7 @@ class ExampleTest extends DuskTestCase
                     ->click('#container > header > div.menu-top > div > div > div:nth-child(2) > ul > li:nth-child(3) > a')
                     ->pause(3741)
                     ->click('#container > section.profle.mb20 > div > div.row.\31 0 > div.col-md-3.plr10 > div > div:nth-child(1) > div.content-ql > ul > li:nth-child(1) > a')
-                    ->pause(300000);
+                    ->pause(180007);
 
         });
     }
@@ -563,6 +574,8 @@ class ExampleTest extends DuskTestCase
                     ->pause(3512)
                     ->press('.submitUnit > .button')
                     ->pause(15471);
+                    //->waitForText($tkddn->email,10000)
+                    //->pause(10000);
         });
     }
 
@@ -602,6 +615,18 @@ class ExampleTest extends DuskTestCase
                     //đợi và nhập mã xác thực
         });
     }
+
+
+
+    // public function  testDangBaiViet()
+    //     {
+    //         //nhìn vào table "Schedule",
+    //         //hom nay "Tuesday", ở "NhatTao", có ID bai viết nào cần đăng
+
+    //         //Chỉ quản lý theo 1 tuần mà thôi
+
+    //     }
+
 
      /**
      * @group dangbainhattao
@@ -674,8 +699,8 @@ class ExampleTest extends DuskTestCase
                     ->mouseover('#header > div.pageWidth > div > div > div.headerBar-right > div.visitor.Popup > a')
                     ->pause(3110)
                     ->click('#XenForoUniq1 > ul > li:nth-child(1) > a')
-                    //để đợi 5p để chỉnh sửa và cập nhật bằng tay
-                    ->pause(300000);
+                    //để đợi 3p để chỉnh sửa và cập nhật bằng tay
+                    ->pause(180017);
         });
     }
 }

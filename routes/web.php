@@ -49,7 +49,7 @@ Route::get('/dstaikhoandd','App\Http\Controllers\HomeController@dstaikhoandd');
 
 
 
-
+//XỬ LÝ CỦA BÀI VIẾT
 // Route::get('/dangbai','App\Http\Controllers\HomeController@dangbai');
 Route::get('/taobaiviet','App\Http\Controllers\BaiVietController@taobaiviet');
 Route::get('/qlbaiviet','App\Http\Controllers\BaiVietController@qlbaiviet');
@@ -61,6 +61,8 @@ Route::get('/dangbai','App\Http\Controllers\BaiVietController@dangbai');
 Route::get('/dangbaidd/{id_bv}','App\Http\Controllers\BaiVietController@dangbaidd');
 Route::post('/timkiem','App\Http\Controllers\BaiVietController@search');
 Route::get('/capnhatbaidang','App\Http\Controllers\BaiVietController@capnhatbaidang');
+Route::get('/laplich','App\Http\Controllers\BaiVietController@laplich');
+Route::post('/laplichtd','App\Http\Controllers\BaiVietController@laplichtd');
 // Route::get('/capnhatbv','App\Http\Controllers\BaiVietController@capnhatbv');
 
 

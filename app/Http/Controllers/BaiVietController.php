@@ -67,7 +67,7 @@ class BaiVietController extends Controller
         if (!$process->isSuccessful()) {
             $process->stop();
             return false;
-          //  throw new ProcessFailedException($process);
+            //throw new ProcessFailedException($process);
         }
         $process->stop();
 
@@ -99,6 +99,7 @@ class BaiVietController extends Controller
     }
 
     public function dangbaidd($id_bv){
+        //dùng bảng tạm
         DB::table('luudangnhapdd')
             ->where('id', 1)
             ->update(['id_baidang' =>  $id_bv]);
@@ -142,6 +143,27 @@ class BaiVietController extends Controller
     }
 
     public function luubaiviet(Request $request){
+
+        $this->validate($request,
+        [
+            'tenbaiviet'=>'required',
+            'tieude'=>'required|min:10',
+            'giaban'=>'required|numeric',
+            'noidung'=>'required|min:10',
+            'hinhanh'=>'required',
+
+        ],
+        [
+            'tenbaiviet.required'=>'Vui lòng nhập tên bài viết!',
+            'tieude.required'=>'Vui lòng nhập tiêu đề!',
+            'noidung.required'=>'Vui lòng nhập nội dung bài viết!',
+            'giaban.required'=>'Vui lòng nhập giá bán!',
+            'hinhanh.required'=>'Vui lòng nhập hình ảnh!',
+            'tieude.min'=>'Tiêu đề phải có ít nhất 10 ký tự!',
+            'noidung.min'=>'Nội dung phải có ít nhất 10 ký tự!',
+            'giaban.numeric'=>'Giá tiền phải là số!',
+
+        ]);
 
         $dm=DB::table('danhmuc')->where('tendanhmuc','Dịch vụ, du lịch')->first();
         $lt=DB::table('loaitin')->where('tenloaitin','Cần bán')->first();
@@ -247,12 +269,37 @@ class BaiVietController extends Controller
         return true;
     }
     public function capnhatbaidang(){
-        $kiemtracapnhat = $this->capnhat_auto();
-         if ($kiemtracapnhat) {
-             return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thành công');
-         }else{
-         return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thất bại');
-         }
+        if(Session::has('id_tk')){
+            $kiemtracapnhat = $this->capnhat_auto();
+            if ($kiemtracapnhat) {
+                return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thành công');
+            }else{
+                return redirect('/trangchu')-> with('capnhatbaidang','Cập nhật bài viết thất bại');
+            }
+        }
+        else{
+            return redirect('/dangnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
+        }
+    }
+
+    public function laplich(){
+        if(Session::has('id_tk')){
+            $dsbaiviet = DB::table('baiviet')->where('id_nd',session('id_nd'))->get();
+            return view('pages.laplich')->with('dsbaiviet',$dsbaiviet);
+        }
+        else{
+            return redirect('/dangnhapdd')->with('alert','Vui lòng đăng nhập diễn đàn trước');
+        }
+
+    }
+
+    public function laplichtd(Request $request){
+        //luu id bài viết mới nhập vào bảng tạm
+        $keyid = $request->id_submit;
+         DB::table('luudangnhapdd')
+        ->where('id', 1)
+        ->update(['id_baidang' => $keyid]);
+        return redirect('/laplich');
     }
     // public function capnhatbv(){
     //     if(Session::has('id_tk')){

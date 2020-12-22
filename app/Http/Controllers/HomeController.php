@@ -23,11 +23,14 @@ class HomeController extends Controller
     }
 
     public function dangnhapdd(){
-        if(Session::has('id_tk')){
-             return redirect('/dangnhapdd')->with('alert','Vui lòng thoát tài khoản diễn đàn hiện tại!');
-         }
+        if(session::has('id_tk')){
+            return redirect('/trangchu')->with('alert','Bạn phải đăng xuất trước khi đăng nhập mới!');
+
+            // return view('pages.dangnhapdd')->with('alert','Bạn phải đăng xuất trước khi đăng nhập mới!');
+        }
         else{
             return view('pages.dangnhapdd');
+
         }
     }
 
@@ -67,9 +70,9 @@ class HomeController extends Controller
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-           // $process->stop();
-           // return false;
-            throw new ProcessFailedException($process);
+            $process->stop();
+            return false;
+          //  throw new ProcessFailedException($process);
         }
 
         $process->stop();
@@ -121,15 +124,16 @@ class HomeController extends Controller
 
            $kiemtradangnhap= $this->dangnhapdd_auto();
            if($kiemtradangnhap){
-            return redirect('/dangbai')->with('alert','Đăng nhập thành công!');
+            return redirect('/dangbai')->with('thanhcong','Đăng nhập thành công!');
            }
            else{
                 Session::forget(['id_tk','sodt','diendan']);
-                return Redirect::to('/dangnhapdd')->with('dangnhap','Đăng nhập thất bại!');
+                return Redirect::to('/dangnhapdd')->with('thanhcong','Đăng nhập thất bại!');
            }
 
             // return redirect()->action([HomeController::class, 'home']);
-        }else {
+        }
+        else {
             return redirect('/dangnhapdd')->with('alert','Sai tài khoản,email hoặc mật khẩu.Vui lòng đăng nhập lại!');
 
            // Session::put('message','Mật khẩu hoặc tài khoản không đúng. Mời nhập lại!');
@@ -143,7 +147,12 @@ class HomeController extends Controller
 
 
     public function dangkydd(){
-        return view('pages.dangkydd');
+        if(session::has('id_tk')){
+            return redirect('/trangchu')->with('alert','Bạn phải đăng xuất trước khi đăng ký mới!');
+        }
+        else{
+            return view('pages.dangkydd');
+        }
     }
 
 
@@ -177,7 +186,7 @@ class HomeController extends Controller
 
         //bắt lỗi, hiện error
         if (!$process->isSuccessful()) {
-
+            $process->stop();
            return false;
 
         }
@@ -196,7 +205,7 @@ class HomeController extends Controller
                 'hoten'=>'required',
                 'email'=>'required|email',
                 'tendangnhap'=>'required',
-                'sodienthoai'=>'required|min:10|max:10',
+                'sodienthoai'=>'required|min:10|max:10|numeric',
                 'password'=>'required|min:6',
                 'password_confirm'=>'required|same:password',
                // 'diachi'=>'required',
@@ -214,6 +223,8 @@ class HomeController extends Controller
                 'sodienthoai.required'=>'Vui lòng nhập số điện thoại!',
                 'sodienthoai.min'=>'Số điện thoại chỉ có 10 số!',
                 'sodienthoai.max'=>'Số điện thoại chỉ có 10 số!',
+                'sodienthoai.numeric'=>'Số điện thoại phải là số',
+
                // 'diachi.required'=>'Vui lòng nhập địa chỉ!',
                // 'phuong.required'=>'Vui lòng nhập phường/xã!',
                // 'quan.required'=>'Vui lòng nhập quận/huyện!',

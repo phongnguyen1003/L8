@@ -18,6 +18,9 @@
         <section id="main-content abcd">
             <section class="wrapper" id="abcde">
                 <div class="table-agile-info">
+                    @if (Session::has('thanhcong'))
+                        <div class="alert alert-success">{{Session::get('thanhcong')}}</div>
+                    @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             ĐĂNG BÀI VIẾT
@@ -38,7 +41,6 @@
                             echo '<span class="text-alert">'.$dangbai.'</span>';
                             Session::put('dangbai',null);
                         }
-
                         ?>
                         <div>
                             <table class="table" ui-jq="footable" ui-options='{

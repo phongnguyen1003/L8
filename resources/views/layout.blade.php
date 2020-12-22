@@ -70,6 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </li>
                 </form> --}}
                     <!-- user login dropdown start-->
+                    @if (Session::has('id_tk'))
+
                     <li class="dropdown">
                         <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <img alt="" src="{{ asset('backend/images/linh1.jpg') }}"
@@ -97,6 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="{{URL::to('/xulydangxuatdd')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
                         </ul>
                     </li>
+                    @endif
 
                     <li class="dropdown">
                         <a style="margin-top: 7px;" data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -184,12 +187,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                         </li> --}}
 
-                        {{-- <li>
-                            <a href="">
-                                <i class="fa fa-hourglass-end"></i>
-                                <span>Lập lịch tự động</span>
-                            </a>
-                        </li> --}}
+
 
                         <li>
                             <a href="{{ URL::to('/taobaiviet') }}">
@@ -210,7 +208,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Danh sách tài khoản diễn đàn</span>
                             </a>
                         </li>
-
+                        <li>
+                            <a href="{{ URL::to('/laplich') }}">
+                                <i class="fa fa-hourglass-end"></i>
+                                <span>Lập lịch tự động</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ URL::to('/info') }}">
                                 <i class="fa fa-user"></i>
@@ -237,6 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 @yield('content_info')
                 @yield('content_dstaikhoandd')
                 @yield('content_capnhatbv')
+                @yield('content_laplich')
 
             </section>
             <!-- footer -->

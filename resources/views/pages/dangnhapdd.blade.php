@@ -44,6 +44,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="alert alert-success">Đăng xuất</div>
     @else --}}
 
+        @if(Session::has('thanhcong'))
+            <div class="alert alert-success">{{Session::get('thanhcong')}}</div>
+        @endif
+
         <form action="{{URL::to('/xulydangnhapdd')}}" method="post">
             {{ csrf_field()}}
             <input type="text" class="ggg" name="email" placeholder="E-MAIL" required="">

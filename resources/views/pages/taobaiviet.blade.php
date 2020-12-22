@@ -17,6 +17,13 @@
             <header class="panel-heading">
                 TẠO BÀI VIẾT
             </header>
+            @if(count($errors)>0)
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $err)
+                {{$err}}
+                @endforeach
+            </div>
+            @endif
             <div class="panel-body">
                 <?php
                 $message = Session::get('message');
